@@ -1,0 +1,1228 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Financial Crime, Compliance & Risk Knowledge Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#040d1f;
+  --navy2:#071428;
+  --card:#0a1a35;
+  --card2:#0c1e3d;
+  --border:#1a3a6a;
+  --cyan:#00e5ff;
+  --cyan2:#00b8d9;
+  --green:#00e676;
+  --purple:#7c4dff;
+  --purple2:#9c6fff;
+  --text:#e8f4ff;
+  --muted:#7aa0cc;
+  --gold:#ffc107;
+}
+html,body{height:100%;background:var(--navy);color:var(--text);font-family:'Inter',sans-serif}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  background:rgba(4,13,31,0.95);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(10px);
+  position:sticky;top:0;z-index:100;
+}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-logo{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,#0e3a7a,#1a5fb4);
+  border:1.5px solid var(--cyan2);
+  display:flex;align-items:center;justify-content:center;
+}
+.nav-logo svg{width:22px;height:22px}
+.brand-title{font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:#fff}
+.brand-sub{font-size:11px;color:var(--cyan);letter-spacing:0.05em}
+.nav-home{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 20px;border:1.5px solid var(--border);
+  border-radius:8px;background:transparent;
+  color:var(--text);font-size:14px;cursor:pointer;
+  transition:border-color .2s,background .2s;font-family:'Inter',sans-serif;
+}
+.nav-home:hover{border-color:var(--cyan2);background:rgba(0,229,255,0.07)}
+.nav-back{
+  display:none;align-items:center;gap:8px;
+  padding:8px 20px;border:1.5px solid var(--border);
+  border-radius:8px;background:transparent;
+  color:var(--text);font-size:14px;cursor:pointer;
+  transition:border-color .2s,background .2s;font-family:'Inter',sans-serif;
+}
+.nav-back:hover{border-color:var(--cyan2);background:rgba(0,229,255,0.07)}
+.nav-back.visible{display:flex}
+
+/* LAST SCORE MODAL */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:200;
+  background:rgba(2,8,20,0.82);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:40px 36px;
+  max-width:380px;width:90%;text-align:center;
+  animation:fadeIn .25s ease;position:relative;
+}
+.modal-close{
+  position:absolute;top:14px;right:16px;
+  background:none;border:none;color:var(--muted);
+  font-size:20px;cursor:pointer;line-height:1;padding:4px 8px;
+  border-radius:6px;transition:color .15s,background .15s;
+}
+.modal-close:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.modal-score-circle{
+  width:100px;height:100px;border-radius:50%;
+  margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;border:3px solid var(--cyan2);
+  background:rgba(0,180,255,0.07);
+}
+.modal-score-num{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:var(--cyan)}
+.modal-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:6px}
+.modal-date{font-size:12px;color:var(--muted);margin-bottom:24px}
+.modal-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.modal-stat{background:rgba(10,26,53,0.7);border:1px solid var(--border);border-radius:10px;padding:14px}
+.modal-stat-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:3px}
+.modal-stat-label{font-size:11px;color:var(--muted)}
+.no-score{color:var(--muted);font-size:14px;line-height:1.7}
+
+/* SCREENS */
+.screen{display:none;min-height:calc(100vh - 65px)}
+.screen.active{display:block}
+
+/* ===== HOME SCREEN ===== */
+#home{
+  position:relative;overflow:hidden;
+  background:#00061a;
+  padding:18px;
+  min-height:calc(100vh - 65px);
+}
+#bg-canvas{
+  position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;
+}
+/* Outer rounded border — matches the glowing rectangle in screenshot */
+.home-border-wrap{
+  position:relative;z-index:2;
+  border:1px solid rgba(20,80,200,0.50);
+  border-radius:16px;
+  padding:50px 44px;
+  background:transparent;
+  min-height:calc(100vh - 103px);
+  display:flex;align-items:center;
+}
+.home-inner{
+  max-width:1100px;margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:center;
+}
+.home-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;border-radius:20px;
+  border:1px solid var(--border);
+  background:rgba(10,26,53,0.8);
+  font-size:12px;color:var(--cyan);
+  margin-bottom:24px;letter-spacing:0.03em;
+}
+.home-badge svg{width:14px;height:14px;fill:none;stroke:var(--cyan);stroke-width:2}
+.home-title{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:800;line-height:1.2;
+  color:#fff;margin-bottom:20px;
+}
+.home-desc{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:36px;max-width:420px}
+.btn-start{
+  display:inline-flex;align-items:center;gap:12px;
+  padding:16px 36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan2));
+  color:#fff;font-size:16px;font-weight:600;
+  border:none;cursor:pointer;font-family:'Sora',sans-serif;
+  transition:opacity .2s,transform .2s;
+  box-shadow:0 4px 30px rgba(124,77,255,0.3);
+}
+.btn-start:hover{opacity:0.9;transform:translateY(-1px)}
+.btn-start svg{width:20px;height:20px}
+.home-meta{
+  display:flex;align-items:center;gap:20px;
+  margin-top:16px;font-size:12px;color:var(--muted);
+}
+.home-meta span{display:flex;align-items:center;gap:6px}
+.home-meta svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2}
+
+/* STAT CARDS GRID */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat-card{
+  background:#060f2a;
+  border:1px solid rgba(20,55,120,0.65);
+  border-radius:14px;
+  padding:30px 20px 24px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  min-height:150px;justify-content:center;
+}
+/* Colored bottom accent line */
+.stat-card::after{
+  content:'';position:absolute;bottom:0;left:8%;right:8%;height:2px;border-radius:1px;
+  background:linear-gradient(90deg,transparent,#4a7fff,transparent);
+}
+.stat-card:nth-child(2)::after{background:linear-gradient(90deg,transparent,#00d4e8,transparent)}
+.stat-card:nth-child(3)::after{background:linear-gradient(90deg,transparent,#9b59ff,transparent)}
+.stat-card:nth-child(4)::after{background:linear-gradient(90deg,transparent,#00e676,transparent)}
+/* Inner corner glow top-right */
+.stat-card::before{
+  content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,180,255,0.12),transparent 70%);
+}
+.stat-card:nth-child(2)::before{background:radial-gradient(circle,rgba(0,230,118,0.10),transparent 70%)}
+.stat-card:nth-child(3)::before{background:radial-gradient(circle,rgba(124,77,255,0.12),transparent 70%)}
+.stat-card:nth-child(4)::before{background:radial-gradient(circle,rgba(0,230,118,0.10),transparent 70%)}
+.stat-icon{
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.stat-icon.blue{background:rgba(0,100,255,0.12);border:1.5px solid rgba(0,200,255,0.25)}
+.stat-icon.green{background:rgba(0,200,80,0.10);border:1.5px solid rgba(0,230,118,0.25)}
+.stat-icon.purple{background:rgba(110,60,255,0.12);border:1.5px solid rgba(150,100,255,0.25)}
+.stat-icon.green2{background:rgba(0,200,80,0.10);border:1.5px solid rgba(0,230,118,0.25)}
+.stat-icon svg{width:24px;height:24px}
+.stat-label{font-size:13px;color:var(--muted);margin-bottom:10px;letter-spacing:0.02em}
+.stat-val{font-family:'Sora',sans-serif;font-size:32px;font-weight:700;line-height:1}
+.stat-val.cyan{color:var(--cyan)}
+.stat-val.white{color:#fff}
+.stat-val.purple{color:var(--purple2)}
+.stat-val.green{color:var(--green)}
+
+/* card icon specific colors from image */
+.stat-card:nth-child(1) .stat-icon{ background:rgba(5,20,80,0.7);   border:1.5px solid rgba(50,100,240,0.55);}
+.stat-card:nth-child(2) .stat-icon{ background:rgba(0,50,55,0.6);   border:1.5px solid rgba(0,190,200,0.55);}
+.stat-card:nth-child(3) .stat-icon{ background:rgba(35,8,75,0.7);   border:1.5px solid rgba(110,50,210,0.55);}
+.stat-card:nth-child(4) .stat-icon{ background:rgba(0,55,25,0.6);   border:1.5px solid rgba(0,185,90,0.55);}
+
+/* ===== QUIZ CONFIG SCREEN ===== */
+#config{
+  background:var(--navy);
+  padding:60px 40px;
+  display:none;
+}
+#config.active{display:flex;flex-direction:column;align-items:center}
+.config-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:40px;
+  max-width:560px;width:100%;
+}
+.config-title{font-family:'Sora',sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:8px}
+.config-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.form-group{margin-bottom:24px}
+.form-label{font-size:13px;color:var(--muted);margin-bottom:10px;display:block;font-weight:500;letter-spacing:0.03em}
+.option-grid{display:grid;gap:10px}
+.option-grid.cols2{grid-template-columns:1fr 1fr}
+.option-btn{
+  padding:12px 16px;border-radius:8px;
+  border:1.5px solid var(--border);
+  background:transparent;color:var(--text);
+  font-size:14px;cursor:pointer;
+  transition:all .2s;font-family:'Inter',sans-serif;
+  text-align:left;
+}
+.option-btn:hover{border-color:var(--cyan2);background:rgba(0,229,255,0.05)}
+.option-btn.selected{border-color:var(--cyan);background:rgba(0,229,255,0.1);color:#fff}
+.btn-primary{
+  width:100%;padding:14px;border-radius:10px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan2));
+  color:#fff;font-size:15px;font-weight:600;
+  border:none;cursor:pointer;font-family:'Sora',sans-serif;
+  margin-top:8px;transition:opacity .2s;
+}
+.btn-primary:hover{opacity:0.9}
+
+/* ===== QUIZ SCREEN ===== */
+#quiz{
+  background:var(--navy);
+  padding:40px;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+}
+#quiz.active{display:flex}
+.quiz-wrap{max-width:680px;width:100%}
+.quiz-header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;
+}
+.quiz-progress-text{font-size:13px;color:var(--muted)}
+.quiz-timer{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:20px;
+  background:var(--card);border:1px solid var(--border);
+  font-size:15px;font-weight:600;font-family:'Sora',sans-serif;
+}
+.quiz-timer.warning{border-color:#ff5252;color:#ff5252}
+.quiz-timer svg{width:16px;height:16px;stroke:var(--cyan);fill:none;stroke-width:2}
+.quiz-timer.warning svg{stroke:#ff5252}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;margin-bottom:32px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));border-radius:2px;transition:width .4s}
+.category-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:4px;
+  background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);
+  font-size:11px;color:var(--cyan);letter-spacing:0.05em;
+  margin-bottom:14px;text-transform:uppercase;
+}
+.question-text{
+  font-family:'Sora',sans-serif;font-size:20px;font-weight:600;
+  color:#fff;line-height:1.5;margin-bottom:28px;
+}
+.options-list{display:flex;flex-direction:column;gap:12px}
+.opt{
+  padding:16px 20px;border-radius:10px;
+  border:1.5px solid var(--border);
+  background:var(--card);color:var(--text);
+  font-size:15px;cursor:pointer;text-align:left;
+  transition:all .2s;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;gap:14px;
+}
+.opt-letter{
+  width:28px;height:28px;border-radius:6px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;color:var(--muted);
+  flex-shrink:0;transition:all .2s;
+}
+.opt:hover:not(.disabled){border-color:var(--cyan2);background:rgba(0,229,255,0.05)}
+.opt:hover:not(.disabled) .opt-letter{border-color:var(--cyan2);color:var(--cyan)}
+.opt.correct{border-color:var(--green);background:rgba(0,230,118,0.08)}
+.opt.correct .opt-letter{background:rgba(0,230,118,0.2);border-color:var(--green);color:var(--green)}
+.opt.wrong{border-color:#ff5252;background:rgba(255,82,82,0.08)}
+.opt.wrong .opt-letter{background:rgba(255,82,82,0.15);border-color:#ff5252;color:#ff5252}
+.opt.disabled{cursor:default}
+.explanation{
+  margin-top:20px;padding:16px 20px;
+  background:rgba(0,229,255,0.05);
+  border:1px solid rgba(0,229,255,0.15);
+  border-radius:10px;font-size:14px;color:var(--muted);line-height:1.6;
+  animation:fadeIn .3s ease;
+}
+.explanation strong{color:var(--cyan)}
+.btn-next{
+  margin-top:24px;padding:13px 32px;
+  border-radius:8px;border:1.5px solid var(--cyan2);
+  background:transparent;color:var(--cyan);
+  font-size:14px;font-weight:600;cursor:pointer;
+  font-family:'Sora',sans-serif;transition:all .2s;
+}
+.btn-next:hover{background:rgba(0,229,255,0.1)}
+
+/* ===== RESULTS SCREEN ===== */
+#results{
+  background:var(--navy);padding:60px 40px;
+  display:none;flex-direction:column;align-items:center;
+}
+#results.active{display:flex}
+.results-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:48px 40px;
+  max-width:600px;width:100%;text-align:center;
+}
+.score-circle{
+  width:120px;height:120px;border-radius:50%;
+  margin:0 auto 28px;
+  background:conic-gradient(var(--cyan) var(--p), var(--border) 0);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.score-circle::before{
+  content:'';position:absolute;inset:8px;
+  border-radius:50%;background:var(--card);
+}
+.score-num{
+  position:relative;z-index:1;
+  font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--cyan);
+}
+.results-title{font-family:'Sora',sans-serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:8px}
+.results-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.results-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+.rs{background:rgba(10,26,53,0.6);border:1px solid var(--border);border-radius:10px;padding:16px}
+.rs-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px}
+.rs-val.green{color:var(--green)}
+.rs-val.red{color:#ff5252}
+.rs-val.cyan{color:var(--cyan)}
+.rs-label{font-size:12px;color:var(--muted)}
+.results-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-outline{
+  padding:12px 28px;border-radius:8px;
+  border:1.5px solid var(--border);background:transparent;
+  color:var(--text);font-size:14px;font-weight:600;cursor:pointer;
+  font-family:'Sora',sans-serif;transition:all .2s;
+}
+.btn-outline:hover{border-color:var(--cyan2);background:rgba(0,229,255,0.06)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* PAUSE MODAL */
+.pause-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,4,18,0.88);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;
+}
+.pause-overlay.open{display:flex}
+.pause-box{
+  background:#060f2a;border:1px solid rgba(20,60,160,0.6);
+  border-radius:20px;padding:44px 40px;
+  max-width:380px;width:90%;text-align:center;
+  animation:fadeIn .22s ease;
+  box-shadow:0 0 60px rgba(0,80,220,0.18);
+}
+.pause-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(10,30,100,0.6);border:1.5px solid rgba(60,120,255,0.4);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+}
+.pause-icon svg{width:28px;height:28px;stroke:var(--cyan);fill:none;stroke-width:2}
+.pause-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px}
+.pause-sub{font-size:14px;color:var(--muted);margin-bottom:12px;line-height:1.6}
+.pause-progress{
+  background:rgba(0,0,0,0.3);border:1px solid var(--border);
+  border-radius:8px;padding:12px 16px;margin-bottom:28px;
+  display:flex;justify-content:space-between;align-items:center;font-size:13px;
+}
+.pause-progress span{color:var(--muted)}
+.pause-progress strong{color:var(--cyan);font-family:'Sora',sans-serif;font-size:15px}
+.pause-actions{display:flex;flex-direction:column;gap:10px}
+.btn-resume{
+  padding:13px;border-radius:9px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan2));
+  color:#fff;font-size:15px;font-weight:600;
+  border:none;cursor:pointer;font-family:'Sora',sans-serif;
+  transition:opacity .2s;
+}
+.btn-resume:hover{opacity:0.88}
+.btn-restart{
+  padding:12px;border-radius:9px;
+  border:1.5px solid var(--border);background:transparent;
+  color:var(--text);font-size:14px;font-weight:600;
+  cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;
+}
+.btn-restart:hover{border-color:var(--cyan2);background:rgba(0,229,255,0.06)}
+.btn-quit{
+  padding:12px;border-radius:9px;
+  border:1.5px solid rgba(255,82,82,0.35);background:transparent;
+  color:#ff6b6b;font-size:14px;font-weight:600;
+  cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;
+}
+.btn-quit:hover{border-color:#ff5252;background:rgba(255,82,82,0.08)}
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+
+/* Dots background */
+.dots-bg{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background-image:radial-gradient(circle,rgba(100,160,255,0.15) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;opacity:0.5;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2">
+        <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-title">Financial Crime, Compliance & Risk Knowledge Platform</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button class="nav-back" id="nav-back" onclick="goBack()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Back
+    </button>
+    <button class="nav-home" onclick="goHome()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      Home
+    </button>
+  </div>
+</nav>
+
+<!-- LAST SCORE MODAL -->
+<div class="modal-overlay" id="score-modal" onclick="closeScoreModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeScoreModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- HOME SCREEN -->
+<div id="home" class="screen active">
+  <canvas id="bg-canvas"></canvas>
+  <div class="home-border-wrap">
+  <div class="home-inner">
+    <div>
+      <div class="home-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+        AML &bull; Compliance &bull; Investigation &bull; Risk Intelligence
+      </div>
+      <h1 class="home-title">
+        Practice Real-World
+        Compliance & Financial
+        Crime Scenarios
+      </h1>
+      <p class="home-desc"><p class="intro">
+        Develop practical skills in AML/CFT, KYC/KYB, blockchain investigations, gaming fraud detection, and compliance risk management through interactive assessments.</p>
+      </p>
+
+      <button class="btn-start" onclick="showConfig()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" stroke="none"/></svg>
+        Begin Assessment
+      </button>
+      <div class="home-meta">
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+          Scenario-based questions
+        </span>
+        <span style="color:var(--border)">|</span>
+        <span onclick="openScoreModal()" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color=''">
+          <svg viewBox="0 0 24 24"><path d="M22 16.74V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14l4 4V16.74z"/></svg>
+          Instant feedback
+        </span>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5ab4ff" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="stat-label">Assessment Categories</div>
+        <div class="stat-val cyan">6</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="stat-label">Difficulty Levels</div>
+        <div class="stat-val white">3</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple2)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="stat-label">Question Bank</div>
+        <div class="stat-val purple">50+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <div class="stat-label">Assessment Mode</div>
+        <div class="stat-val green">Interactive</div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- CONFIG SCREEN -->
+<div id="config" class="screen">
+  <div class="config-card">
+    <h2 class="config-title">Configure Your Assessment</h2>
+    <p class="config-sub">Select a category, difficulty level, and question count.</p>
+
+    <div class="form-group">
+      <label class="form-label">SELECT CATEGORY</label>
+      <div class="option-grid cols2">
+        <button class="option-btn selected" data-group="cat" data-val="crypto">🔗 Cryptocurrency</button>
+        <button class="option-btn" data-group="cat" data-val="aml">🛡️ AML / CFT</button>
+        <button class="option-btn" data-group="cat" data-val="kyc">👤 KYC / KYB</button>
+        <button class="option-btn" data-group="cat" data-val="risk">⚠️ Risk Detection</button>
+        <button class="option-btn" data-group="cat" data-val="blockchain">🔍 Blockchain Investigations</button>
+        <button class="option-btn" data-group="cat" data-val="gaming">🎮 Gaming Fraud & Risk</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">DIFFICULTY LEVEL</label>
+      <div class="option-grid cols2">
+        <button class="option-btn selected" data-group="diff" data-val="beginner">🟢 Beginner</button>
+        <button class="option-btn" data-group="diff" data-val="intermediate">🟡 Intermediate</button>
+        <button class="option-btn" data-group="diff" data-val="advanced">🔴 Advanced</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">NUMBER OF QUESTIONS</label>
+      <div class="option-grid" style="grid-template-columns:repeat(4,1fr)">
+        <button class="option-btn" data-group="count" data-val="5">5</button>
+      </div>
+    </div>
+
+    <button class="btn-primary" onclick="startQuiz()">🚀 Start Quiz</button>
+  </div>
+</div>
+
+<!-- PAUSE MODAL -->
+<div class="pause-overlay" id="pause-modal">
+  <div class="pause-box">
+    <div class="pause-icon">
+      <svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </div>
+    <div class="pause-title">Quiz Paused</div>
+    <p class="pause-sub">Take a breather. Your progress is saved.</p>
+    <div class="pause-progress">
+      <span>Progress</span>
+      <strong id="pause-progress-text">0 / 0</strong>
+    </div>
+    <div class="pause-actions">
+      <button class="btn-resume" onclick="resumeQuiz()">▶ Resume Quiz</button>
+      <button class="btn-restart" onclick="closePauseAndGo('config')">🔄 Start New Assessment</button>
+      <button class="btn-quit" onclick="closePauseAndGo('home')">✕ Quit to Home</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quiz" class="screen">
+  <div class="quiz-wrap">
+    <div class="quiz-header">
+      <div class="quiz-progress-text" id="q-progress">Question 1 of 10</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button onclick="pauseQuiz()" style="
+          display:flex;align-items:center;gap:6px;
+          padding:7px 14px;border-radius:8px;
+          border:1.5px solid var(--border);background:transparent;
+          color:var(--muted);font-size:13px;cursor:pointer;
+          font-family:'Inter',sans-serif;transition:all .2s;
+        " onmouseover="this.style.borderColor='var(--cyan2)';this.style.color='var(--cyan)'"
+           onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+            <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+          </svg>
+          Pause
+        </button>
+        <div class="quiz-timer" id="q-timer">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="timer-val">60</span>s
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="q-bar" style="width:10%"></div></div>
+    <div class="category-tag" id="q-cat">CRYPTOCURRENCY</div>
+    <div class="question-text" id="q-text">Loading question...</div>
+    <div class="options-list" id="q-opts"></div>
+    <div id="q-explanation" style="display:none" class="explanation"></div>
+    <button class="btn-next" id="q-next" style="display:none" onclick="nextQuestion()">Next Question →</button>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="results" class="screen">
+  <div class="results-card">
+    <div class="score-circle" id="score-circle">
+      <div class="score-num" id="score-pct">0%</div>
+    </div>
+    <h2 class="results-title" id="results-title">Assessment Completed!</h2>
+    <p class="results-sub" id="results-sub">Here's how you did</p>
+    <div class="results-stats">
+      <div class="rs"><div class="rs-val green" id="r-correct">0</div><div class="rs-label">Correct</div></div>
+      <div class="rs"><div class="rs-val red" id="r-wrong">0</div><div class="rs-label">Incorrect</div></div>
+      <div class="rs"><div class="rs-val cyan" id="r-time">0s</div><div class="rs-label">Avg Time</div></div>
+    </div>
+    <div class="results-actions">
+      <button class="btn-outline" onclick="showConfig()">🔄 Try Again</button>
+      <button class="btn-primary" style="width:auto;padding:12px 28px;margin-top:0" onclick="goHome()">🏠 Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- QUESTION BANK ----
+const QB = {
+  crypto:{
+    beginner:[
+      {q:"What is Bitcoin?",opts:["A government-issued digital currency","A decentralized digital currency using cryptography","A type of bank account","A stock trading platform"],ans:1,exp:"Bitcoin is the first decentralized digital currency, operating without a central authority, using cryptographic proof instead."},
+      {q:"What does 'blockchain' refer to?",opts:["A type of internet firewall","A chain of encrypted emails","A distributed ledger of transactions in blocks","A cloud storage service"],ans:2,exp:"A blockchain is a distributed ledger where transactions are grouped into blocks and linked cryptographically."},
+      {q:"What is a crypto 'wallet'?",opts:["A physical wallet with RFID chip","Software/hardware that stores private keys","A bank account for crypto","A crypto exchange account"],ans:1,exp:"A crypto wallet stores private keys that prove ownership of digital assets on the blockchain."},
+      {q:"What is a 'private key' in cryptocurrency?",opts:["A password to an exchange","A secret number that allows spending crypto","A public address for receiving funds","An API key for trading bots"],ans:1,exp:"A private key is a secret cryptographic key that authorizes transactions from your address."},
+      {q:"What is 'mining' in the context of Bitcoin?",opts:["Extracting physical coins from the ground","The process of validating transactions and creating new blocks","Buying Bitcoin at low prices","Hacking into blockchain networks"],ans:1,exp:"Mining is the process by which nodes compete to solve cryptographic puzzles to validate transactions and earn block rewards."},
+    ],
+    intermediate:[
+      {q:"What is a 'mixer' or 'tumbler' service in crypto?",opts:["A trading algorithm","A service that pools and re-distributes crypto to obscure origins","A DeFi lending protocol","A type of hardware wallet"],ans:1,exp:"Mixers pool cryptocurrency from multiple users and redistribute it to obscure the transaction trail — a major AML concern."},
+      {q:"What is a 'Layer 2' solution?",opts:["The second blockchain created","A secondary protocol built atop a base blockchain for scalability","A second wallet address","An exchange's internal ledger"],ans:1,exp:"Layer 2 solutions (e.g. Lightning Network) process transactions off-chain while settling on the main chain, improving speed and cost."},
+      {q:"What distinguishes a privacy coin like Monero from Bitcoin?",opts:["Monero has faster transactions","Monero uses obfuscation techniques to make transactions untraceable","Monero is backed by gold","Monero is centrally controlled"],ans:1,exp:"Privacy coins use techniques like ring signatures and stealth addresses to anonymize senders, recipients, and amounts."},
+      {q:"What is a 'smart contract'?",opts:["A legal PDF on blockchain","Self-executing code on a blockchain triggered by conditions","A crypto loan agreement","A compliance document for exchanges"],ans:1,exp:"Smart contracts are self-executing programs stored on a blockchain that run automatically when predefined conditions are met."},
+      {q:"What is DeFi?",opts:["Digital Finance Regulation","Decentralized Finance — financial services without intermediaries","Defense Finance Initiative","Deferred Investment Fund"],ans:1,exp:"DeFi refers to financial services (lending, trading, insurance) built on blockchains that operate without traditional intermediaries."},
+    ],
+    advanced:[
+      {q:"In the context of blockchain analytics, what is 'chain hopping'?",opts:["Moving nodes between blockchains","Converting crypto across multiple blockchains to obscure transaction trails","A consensus mechanism","A type of fork"],ans:1,exp:"Chain hopping involves moving funds across multiple blockchains using cross-chain bridges to break the transaction trail and evade monitoring."},
+      {q:"What is the 'Travel Rule' in crypto (FATF)?",opts:["Rules for crypto ATMs","Requirement for VASPs to share originator/beneficiary info for transfers above threshold","Rules for cross-border cash","A regulation for crypto mining"],ans:1,exp:"FATF's Travel Rule requires Virtual Asset Service Providers to pass originator and beneficiary information along with transfers ≥ $1,000/€1,000."},
+      {q:"What is a 'dusting attack'?",opts:["Sending large amounts of crypto to hack wallets","Sending tiny crypto amounts to deanonymize wallet clusters","A DoS attack on blockchain nodes","Flooding an exchange with orders"],ans:1,exp:"Dusting attacks send minuscule amounts of crypto to multiple wallets, then analyze how those funds move to link addresses and deanonymize users."},
+    ]
+  },
+  aml:{
+    beginner:[
+      {q:"What does AML stand for?",opts:["Asset Management Ledger","Anti-Money Laundering","Authorized Market Listing","Annual Monetary Limit"],ans:1,exp:"AML stands for Anti-Money Laundering — a set of laws, regulations, and procedures to prevent criminals from disguising illegally obtained funds."},
+      {q:"What are the three stages of money laundering?",opts:["Detection, Reporting, Recovery","Placement, Layering, Integration","Deposit, Transfer, Withdrawal","Identification, Verification, Monitoring"],ans:1,exp:"The three classic stages are Placement (introducing dirty money), Layering (disguising the trail), and Integration (reintroducing as clean funds)."},
+      {q:"What is a Suspicious Activity Report (SAR)?",opts:["A customer satisfaction survey","A report filed by financial institutions about suspected illegal activity","An annual regulatory audit","A security incident report"],ans:1,exp:"A SAR is a report filed with financial intelligence units (like FinCEN) when a financial institution suspects money laundering or other financial crimes."},
+      {q:"What is the Financial Action Task Force (FATF)?",opts:["A UN peacekeeping body","An intergovernmental body setting global AML/CFT standards","A central banking regulator","A crypto exchange consortium"],ans:1,exp:"FATF is an intergovernmental body that sets international standards and promotes effective implementation of measures to combat money laundering and terrorist financing."},
+      {q:"What does CFT stand for in AML/CFT?",opts:["Certified Financial Trader","Countering the Financing of Terrorism","Central Fund Transfer","Currency Flow Tracking"],ans:1,exp:"CFT stands for Countering the Financing of Terrorism — the complement to AML that focuses on preventing funds from reaching terrorist organizations."},
+    ],
+    intermediate:[
+      {q:"What is 'structuring' (also known as 'smurfing')?",opts:["Organizing a compliance team","Breaking large transactions into smaller ones to evade reporting thresholds","Structuring a loan agreement","Creating shell companies"],ans:1,exp:"Structuring involves deliberately breaking large sums into smaller transactions to avoid currency transaction reporting thresholds — a federal crime in many jurisdictions."},
+      {q:"What is a Politically Exposed Person (PEP)?",opts:["A marketing influencer","An individual who holds or has held a prominent public function","A high-net-worth retail investor","A licensed financial advisor"],ans:1,exp:"PEPs are individuals who hold or have held senior public roles (heads of state, senior politicians, military officials) and their families/close associates, requiring enhanced due diligence."},
+      {q:"What is a Correspondent Banking relationship?",opts:["A bank that handles mail services","A bank providing services to another bank, facilitating cross-border transactions","A bank's customer service department","A regulatory reporting relationship"],ans:1,exp:"Correspondent banking is when one bank (correspondent) provides services to another (respondent) to execute cross-border transactions — a major AML risk vector."},
+      {q:"What does a Risk-Based Approach (RBA) to AML mean?",opts:["Using AI for compliance","Allocating AML resources proportional to assessed risk levels","Rejecting all high-risk customers","Filing SARs for all transactions"],ans:1,exp:"An RBA means identifying and assessing ML/TF risks and applying resources proportionately — more scrutiny on higher-risk customers, products, and geographies."},
+      {q:"What is a 'shell company' in AML context?",opts:["A company that sells shell products","A legal entity with no real operations used to hide ownership","A startup in the oil industry","A licensed money service business"],ans:1,exp:"Shell companies are legal entities that exist primarily on paper with no real operations, often used to obscure beneficial ownership and move illicit funds."},
+    ],
+    advanced:[
+      {q:"What is 'trade-based money laundering' (TBML)?",opts:["Money laundering through stock trades","Manipulating international trade invoices to transfer value across borders","Insider trading schemes","Laundering through commodity futures"],ans:1,exp:"TBML involves over/under-invoicing of goods, multiple invoicing, or misrepresentation of goods in trade documents to move value across borders and launder proceeds."},
+      {q:"Under FATF Recommendation 16, what must VASPs transmit?",opts:["Transaction fees","Originator and beneficiary information for virtual asset transfers","Only beneficiary information","Only for transfers over $10,000"],ans:1,exp:"FATF Recommendation 16 (Travel Rule) requires VASPs to obtain and transmit originator name, account, address AND beneficiary name and account for crypto transfers ≥ $1,000."},
+      {q:"What is 'de-risking' in the banking sector?",opts:["Reducing investment portfolio risk","Banks exiting high-risk customer segments to avoid regulatory scrutiny","Hedging currency exposure","Increasing collateral requirements"],ans:1,exp:"De-risking is the practice of financial institutions avoiding or exiting entire categories of customers or business lines deemed too costly to manage from an AML/compliance perspective."},
+    ]
+  },
+  kyc:{
+    beginner:[
+      {q:"What does KYC stand for?",opts:["Keep Your Credentials","Know Your Customer","Key Year Certification","Keep Your Crypto"],ans:1,exp:"KYC stands for Know Your Customer — the process of verifying the identity of clients as required by regulations."},
+      {q:"What is the primary purpose of CDD (Customer Due Diligence)?",opts:["To improve customer service","To verify customer identity and assess risk","To offer personalized products","To speed up onboarding"],ans:1,exp:"CDD involves verifying customer identity, understanding the nature of their business, and assessing the risk of money laundering or terrorist financing."},
+      {q:"What is Enhanced Due Diligence (EDD)?",opts:["A standard ID verification","Additional scrutiny applied to higher-risk customers like PEPs","A simplified onboarding process","A type of background check for employees"],ans:1,exp:"EDD is a more rigorous level of KYC applied to high-risk customers (PEPs, high-risk jurisdictions, complex structures) requiring deeper investigation and ongoing monitoring."},
+      {q:"What is 'beneficial ownership'?",opts:["The legal owner of a property","The natural person(s) who ultimately own or control a legal entity","A beneficiary in a will","The shareholder with most shares"],ans:1,exp:"Beneficial ownership refers to the natural person(s) who ultimately own or control a legal entity, even if ownership is held through intermediaries."},
+      {q:"What document is typically required for individual KYC?",opts:["Credit score","Government-issued photo ID and proof of address","Bank statement only","Employment contract"],ans:1,exp:"Standard individual KYC typically requires a government-issued photo ID (passport, national ID, driver's license) and proof of address (utility bill, bank statement)."},
+    ],
+    intermediate:[
+      {q:"What is KYB (Know Your Business)?",opts:["A CRM software category","Due diligence on business entities, verifying ownership, structure, and legitimacy","A credit scoring model","A type of business license"],ans:1,exp:"KYB extends KYC principles to business customers — verifying legal registration, beneficial ownership, directors, and the legitimacy of the business."},
+      {q:"What is a Simplified Due Diligence (SDD) scenario?",opts:["Due diligence on small transactions","Reduced KYC measures applied when risk is demonstrably low","A one-page KYC form","Self-certification without documentation"],ans:1,exp:"SDD applies when ML/TF risk is assessed as low (e.g. publicly listed companies, regulated institutions) — reduced documentation and monitoring may be appropriate."},
+      {q:"What is 'perpetual KYC' (pKYC)?",opts:["KYC done every year","Continuous, event-triggered customer monitoring rather than periodic reviews","A blockchain-based KYC system","A government KYC database"],ans:1,exp:"Perpetual KYC is a continuous approach to customer due diligence, triggering re-verification based on risk events or profile changes rather than fixed periodic reviews."},
+      {q:"What is liveness detection in digital KYC?",opts:["Checking if a customer is alive using public records","Technology that verifies a real person is present during biometric verification","A video interview process","An AI customer service tool"],ans:1,exp:"Liveness detection uses AI/biometrics to verify that the person submitting an identity document during digital onboarding is physically present and not a photo or video."},
+      {q:"What does UBO stand for in KYB?",opts:["Unified Business Operator","Ultimate Beneficial Owner","Underwriter's Business Office","Unregistered Business Organization"],ans:1,exp:"UBO stands for Ultimate Beneficial Owner — the natural person who ultimately owns or controls 25%+ of a company (threshold varies by jurisdiction)."},
+    ],
+    advanced:[
+      {q:"Under the EU's 5th Anti-Money Laundering Directive (5AMLD), what was a key change regarding crypto?",opts:["Crypto was banned in the EU","Crypto exchanges and wallet providers were brought under AML/CFT obligations","All crypto transactions were capped at €1,000","KYC was made optional for crypto"],ans:1,exp:"5AMLD (2020) brought crypto-asset exchanges and custodian wallet providers within the scope of EU AML obligations for the first time, requiring CDD and SAR filing."},
+      {q:"What is 'eKYC' and what are its regulatory challenges?",opts:["Electronic key management","Digital identity verification — challenges include cross-border recognition and data privacy","Email-based KYC — challenges include phishing","A government database — challenges include access costs"],ans:1,exp:"eKYC is fully digital identity verification using biometrics, document scanning, and database checks. Key challenges include varying regulatory acceptance, GDPR compliance, and deepfake fraud."},
+    ]
+  },
+  risk:{
+    beginner:[
+      {q:"What is a 'red flag' in financial crime compliance?",opts:["A transaction flag in bank systems","An indicator that may suggest suspicious activity requiring investigation","A regulatory penalty notice","A type of compliance report"],ans:1,exp:"Red flags are indicators or warning signs that may suggest potential financial crime, prompting further investigation rather than immediate conclusion of guilt."},
+      {q:"What is a customer risk rating?",opts:["A credit score","A classification of a customer's ML/TF risk level based on various factors","A customer satisfaction score","A fraud detection score"],ans:1,exp:"A customer risk rating categorizes customers (Low/Medium/High) based on factors like geography, products used, transaction patterns, and entity type to determine CDD intensity."},
+      {q:"What does 'transaction monitoring' refer to in AML?",opts:["Auditing employee transactions","Automated surveillance of customer transactions to detect suspicious patterns","Monitoring market prices","Reviewing loan applications"],ans:1,exp:"Transaction monitoring is an automated process that analyzes customer transaction data in real-time or retrospectively to flag patterns indicative of financial crime."},
+      {q:"What is a 'high-risk jurisdiction'?",opts:["A country with high taxes","A country identified as having significant AML/CFT deficiencies","A country with high inflation","A country with many crypto exchanges"],ans:1,exp:"High-risk jurisdictions are countries identified (e.g. by FATF's grey/black list) as having strategic deficiencies in their AML/CFT frameworks, requiring enhanced scrutiny."},
+      {q:"What is adverse media screening?",opts:["Blocking negative news about your company","Checking customers against negative news sources for crime, fraud, or sanctions connections","Monitoring competitor press coverage","Social media marketing analysis"],ans:1,exp:"Adverse media screening involves checking customers against news databases, court records, and other sources for negative information suggesting financial crime or reputational risk."},
+    ],
+    intermediate:[
+      {q:"What is 'false positive' in transaction monitoring?",opts:["An alert correctly identifying fraud","An alert flagging legitimate activity as suspicious","A missed fraud transaction","A duplicate transaction alert"],ans:1,exp:"A false positive is a transaction monitoring alert that flags a legitimate customer transaction as suspicious, requiring investigation before clearing — high false positive rates waste resources."},
+      {q:"What is sanctions screening?",opts:["Checking government grants eligibility","Checking customers/transactions against sanctions lists (OFAC, UN, EU) to avoid prohibited dealings","A regulatory audit process","A credit risk assessment"],ans:1,exp:"Sanctions screening involves checking customers, transactions, and counterparties against sanctions lists (OFAC SDN, EU Consolidated List, UN Security Council) to prevent prohibited dealings."},
+      {q:"What is 'typology' in financial crime?",opts:["A study of fonts used in compliance documents","A documented pattern or method used to commit financial crime","A customer segmentation technique","A statistical analysis method"],ans:1,exp:"Typologies are documented schemes or methods used to commit money laundering or terrorist financing, published by bodies like FATF to help institutions recognize common patterns."},
+      {q:"What is 'layering risk' in transaction monitoring?",opts:["Risk from operating on multiple software layers","Risk of clients using complex transaction chains to obscure fund origins","Network infrastructure risk","Multi-currency conversion risk"],ans:1,exp:"Layering risk refers to the risk that customers use complex chains of transactions, transfers, or currency conversions to obscure the origin of illicit funds during the layering stage."},
+      {q:"What is a Name Screening false negative?",opts:["Screening a name multiple times","Failing to match a sanctioned or PEP name due to transliteration or alias variations","A correctly cleared alert","Blocking a legitimate customer by mistake"],ans:1,exp:"A false negative in name screening occurs when a sanctioned individual or PEP passes screening undetected, often due to name spelling variations, aliases, or transliteration differences."},
+    ],
+    advanced:[
+      {q:"What is a 'network analysis' approach in financial crime detection?",opts:["Analyzing bank IT networks for security","Mapping relationships between accounts, entities, and transactions to identify criminal networks","Analyzing social media networks","Monitoring financial news networks"],ans:1,exp:"Network analysis maps connections between accounts, individuals, and transactions to identify hidden relationships and criminal networks, revealing patterns invisible in single-account analysis."},
+      {q:"What is 'contextual integrity' in data-driven AML?",opts:["Ensuring database integrity","The principle that data flows should match the norms of the context in which data was collected","A data encryption standard","A regulatory data retention requirement"],ans:1,exp:"Contextual integrity holds that personal data should flow according to the norms of the context where it was collected — relevant to AML data sharing between institutions and jurisdictions."},
+    ]
+  }
+,
+  blockchain:{
+    beginner:[
+      {q:"What is a TXID (Transaction ID) on a blockchain?",opts:["A wallet's public address","A smart contract identifier","A unique identifier for a specific blockchain transaction","A miner's reward reference"],ans:2,exp:"A TXID uniquely identifies every transaction recorded on a blockchain. It is typically the starting point of any blockchain investigation and can be viewed on a block explorer."},
+      {q:"Which type of tool allows investigators to view on-chain transactions publicly?",opts:["A CRM platform","A blockchain explorer","A network firewall","A spreadsheet application"],ans:1,exp:"Blockchain explorers such as Etherscan, Tronscan, Solscan, and Blockchair allow anyone to view transaction history, wallet balances, and fund flows on public blockchains."},
+      {q:"What does 'wallet attribution' mean in a blockchain investigation context?",opts:["Transferring funds to a new wallet","Encrypting a private key","Generating a fresh wallet address","Identifying the real-world entity or service that controls a specific wallet address"],ans:3,exp:"Wallet attribution links an anonymous on-chain address to a real-world entity — such as an exchange, criminal group, or individual. It is a core technique used in blockchain intelligence and law enforcement."},
+      {q:"What is the primary objective of fund flow analysis?",opts:["Estimating the current market price of tokens","Calculating block rewards for miners","Generating new wallet addresses","Tracing how funds move between blockchain addresses to map the complete fund journey"],ans:3,exp:"Fund flow analysis maps the movement of cryptocurrency from source through intermediary addresses to final destination, helping investigators identify laundering patterns and recover illicit proceeds."},
+      {q:"A wallet receives cryptocurrency directly from a sanctioned address. What is the correct immediate compliance response?",opts:["Ignore it as a single transaction is insufficient to act on","Delete the transaction records","Close the blockchain network","Document the exposure and escalate to the compliance team for investigation and potential SAR filing"],ans:3,exp:"Any confirmed exposure to a sanctioned wallet address must be documented and escalated immediately. This may trigger regulatory reporting obligations regardless of the transaction amount, and delayed action could constitute a sanctions violation."},
+    ],
+    intermediate:[
+      {q:"Which on-chain transaction pattern is most consistent with the layering stage of money laundering?",opts:["Long-term holding of assets in cold storage","Receiving regular payroll transfers on-chain","Making periodic stablecoin purchases","Rapidly sending funds through multiple wallets in quick succession to obscure the origin"],ans:3,exp:"Rapid sequential transfers through chains of wallets — especially when amounts change slightly at each hop — are a textbook layering pattern. The objective is to sever the link between the criminal origin and the eventual destination."},
+      {q:"What is 'chain hopping' and why is it used by criminals?",opts:["Mining across multiple blockchains simultaneously","Frequently changing wallet seed phrases","Issuing new tokens on different networks","Moving assets across multiple blockchains via bridges to fragment the transaction trail and hinder investigators"],ans:3,exp:"Chain hopping exploits the siloed nature of blockchain analytics tools. By moving funds from Ethereum to BNB Chain to Tron via cross-chain bridges, criminals complicate tracing and force investigators to work across multiple analytics platforms."},
+      {q:"Why are crypto mixers and tumblers treated as high-risk services under AML frameworks?",opts:["They significantly increase transaction fees","They operate as unregulated exchanges","They issue synthetic tokens","They deliberately obscure the origin and destination of funds, undermining AML transaction monitoring"],ans:3,exp:"Mixers pool funds from multiple users and redistribute equivalent amounts to different addresses. This is designed to make it impossible to link specific inputs to outputs — a direct obstruction of AML controls and the reason OFAC has sanctioned services like Tornado Cash."},
+      {q:"Which blockchain analytics technique is used to group addresses likely controlled by the same entity?",opts:["Proof-of-work mining","Token liquidity farming","Yield optimisation strategies","Wallet clustering, using heuristics such as common-input-ownership analysis"],ans:3,exp:"Wallet clustering uses analytical heuristics — primarily common-input-ownership (all inputs in a transaction share a controller) and change address detection — to group addresses under a single controlling entity. This is used by tools such as Chainalysis, Elliptic, and TRM Labs."},
+      {q:"An investigator observes funds split from one wallet into 15 sub-wallets, which then reconsolidate at a single exchange deposit address. What stage of money laundering is this most consistent with?",opts:["Placement — introducing criminal proceeds into the financial system","Structuring — breaking transactions below reporting thresholds","Integration — reintroducing laundered funds as legitimate assets","Layering — using complex on-chain transactions to obscure the origin of funds"],ans:3,exp:"The split-and-consolidate pattern across multiple wallets is a layering technique. It creates multiple transaction hops between criminal origin and final deposit point, increasing the investigative effort required to trace the funds."},
+    ],
+    advanced:[
+      {q:"A wallet sends funds through Tornado Cash then immediately deposits to a regulated exchange. What is the primary compliance concern for the exchange?",opts:["The transaction may indicate wash trading activity","The customer may have incurred excessive gas fees","The deposit could represent a sanctions violation and an attempt to conceal the source of funds, requiring immediate SAR consideration","The deposited token may exhibit high price volatility"],ans:2,exp:"Tornado Cash is an OFAC-sanctioned mixer. Funds flowing through it prior to exchange deposit represent both a sanctions risk and a strong indicator of source-of-funds concealment. The exchange must treat this as a high-risk alert, apply EDD, and file a SAR if suspicion cannot be resolved — regardless of the amount."},
+      {q:"Which FATF Recommendation specifically governs the Travel Rule for virtual asset transfers?",opts:["FATF Recommendation 10 — Customer Due Diligence","FATF Recommendation 20 — Suspicious Transaction Reporting","FATF Recommendation 6 — Targeted Financial Sanctions","FATF Recommendation 16 — Wire Transfers, extended to VASPs"],ans:3,exp:"FATF Recommendation 16 (the Travel Rule) requires VASPs to collect and transmit originator and beneficiary name, account identifier, and — for unhosted wallets — additional information for all virtual asset transfers at or above USD/EUR 1,000."},
+      {q:"You identify 40+ wallets sharing common UTXO inputs across multiple transactions. Which analytical heuristic supports their attribution to a single controlling entity?",opts:["Change address heuristic","Zero-knowledge proof analysis","First-in-first-out (FIFO) accounting","Common-input-ownership heuristic"],ans:0,exp:"The common-input-ownership heuristic assumes that all addresses providing inputs to a single transaction are controlled by the same entity. This is the foundational clustering technique used across major blockchain intelligence platforms and is particularly effective in UTXO-based chains like Bitcoin."},
+      {q:"What distinguishes a 'peel chain' transaction pattern from standard multi-hop layering?",opts:["Peel chains settle off-chain between hops","Peel chains only occur on privacy-focused blockchains","Each hop in a peel chain sends the entire balance to a new address","Each hop peels off a small amount to a destination address while forwarding the remaining majority onward — creating an extended, resource-intensive trail"],ans:3,exp:"A peel chain progressively strips small amounts at each hop while moving the bulk of funds further down the chain. This creates a long, branching transaction trail that is difficult to trace manually and is commonly used to obscure the final destination of illicit funds."},
+      {q:"An exchange receives a withdrawal to a wallet associated with a known ransomware operator. The customer claims it is their personal cold wallet. What is the correct compliance response?",opts:["Process the withdrawal — the customer has provided a plausible explanation","Report only if the amount exceeds the local mandatory reporting threshold","Refuse all future business immediately without conducting an investigation","Pause the transaction, apply EDD, document the finding, escalate to compliance, and file a SAR — customer explanations do not override compliance obligations"],ans:3,exp:"A ransomware-flagged wallet address is a critical risk indicator regardless of the customer's explanation. The correct response is to halt the transaction, apply enhanced due diligence, and escalate. Unilateral refusal without investigation — and disclosing the reason to the customer — could constitute tipping off, which is itself a criminal offence in most jurisdictions."},
+    ]
+  },
+  gaming:{
+    beginner:[
+      {q:"What is bonus abuse on an online gaming platform?",opts:["A platform offering disproportionately large welcome bonuses","Cancelling bonus offers after they have been accepted","A technical miscalculation in the bonus engine","Exploiting promotional offers to gain unfair financial advantage, often through multiple accounts"],ans:3,exp:"Bonus abuse involves fraudsters creating multiple accounts or identifying loopholes to repeatedly claim promotional rewards. It is a significant direct cost to operators and is frequently used as a low-friction entry point for money laundering."},
+      {q:"What is multi-accounting on a gaming platform?",opts:["Managing separate accounts for different game types","Using multiple payment methods on a single account","Sharing a family account across multiple devices","One individual operating several accounts in violation of platform terms and conditions"],ans:3,exp:"Multi-accounting allows fraudsters to circumvent bonus restrictions, self-exclusion lists, and stake limits. Detection relies on device fingerprinting, IP matching, behavioural analytics, and document verification cross-referencing."},
+      {q:"What is an Account Takeover (ATO) attack?",opts:["A player transferring account ownership voluntarily","Closing and reopening a dormant account","Upgrading a standard account to VIP status","Unauthorised access to another user's account, typically to extract funds, bonuses, or use it for fraud"],ans:3,exp:"ATO attacks use credential stuffing, phishing, or SIM swapping to compromise accounts. Once inside, attackers may withdraw balances, redeem bonuses, or use the account as a mule to layer illicit funds through gaming activity."},
+      {q:"Which of the following represents the strongest fraud indicator on a gaming platform?",opts:["A player depositing via a credit card","A player submitting identity verification documents","Consistent gameplay patterns over several months","Multiple accounts registered from the same IP address or device fingerprint"],ans:3,exp:"Shared IP addresses or device fingerprints across multiple accounts is a primary multi-accounting indicator. Legitimate players rarely share devices or network infrastructure with other registered accounts, making this a high-confidence fraud signal."},
+      {q:"Which team is primarily responsible for investigating suspicious transactions on a regulated gaming platform?",opts:["The marketing department","The software development team","The customer support team","The fraud, risk, or compliance team"],ans:3,exp:"Fraud, Risk, and Compliance teams conduct transaction monitoring, AML investigations, and file Suspicious Activity Reports on gaming platforms. This function is growing rapidly as regulators — including the UK Gambling Commission and Malta Gaming Authority — increase AML requirements for iGaming operators."},
+    ],
+    intermediate:[
+      {q:"What is chargeback fraud in online gaming, and why is it difficult to prevent?",opts:["A payment provider reversing a failed deposit due to a technical error","An operator withholding a legitimate withdrawal","A player requesting a valid refund after a provably unfair game outcome","A player using deposited funds then disputing the charge with their bank — obtaining both the gaming service and a refund"],ans:3,exp:"Chargeback fraud, also called 'friendly fraud', results in direct financial loss for the operator. It is difficult to prevent because payment networks generally favour the cardholder, and operators must retain strong evidence of service delivery to win disputes."},
+      {q:"Why is device fingerprinting a critical tool in gaming fraud prevention?",opts:["It stores encrypted account passwords","It accelerates withdrawal processing times","It improves the visual rendering of games","It creates a unique device signature from browser, hardware, and software attributes — enabling detection of multi-accounting and returning banned users"],ans:3,exp:"Device fingerprinting collects attributes including browser type, screen resolution, installed fonts, hardware IDs, and WebGL renderer to create a near-unique identifier. This enables platforms to detect returning users who have changed their name, email, or IP address."},
+      {q:"What is collusion in online gaming and why does it raise AML concerns?",opts:["Operators sharing player data with affiliates","A platform partnering with payment providers on preferential rates","Players sharing game strategy tips on public forums","Multiple players secretly coordinating to manipulate outcomes — and potentially using gameplay to layer illicit funds between accounts"],ans:3,exp:"Collusion occurs primarily in peer-vs-peer games such as poker and fantasy sports. Beyond the sporting integrity issue, it serves as a layering mechanism: one player deliberately loses to a co-conspirator, who collects the 'winnings' — creating a legitimate-appearing payout trail for illicit funds."},
+      {q:"A player deposits large sums, places minimal low-risk bets, and withdraws quickly. What does this pattern indicate to a risk analyst?",opts:["The player is a professional gambler eligible for VIP upgrade","A responsible gaming issue requiring welfare intervention","A player testing new deposit methods","Potential use of the platform to layer funds — using gameplay as a veneer of legitimacy while minimising gambling exposure"],ans:3,exp:"The deposit-minimal play-withdraw cycle is one of the most documented gaming money laundering typologies. The criminal accepts a small net loss on bets as the 'cost' of laundering, and the subsequent withdrawal carries the appearance of legitimate gambling winnings."},
+      {q:"Why is Source of Funds (SOF) verification required for high-value gaming customers?",opts:["To offer personalised game recommendations","To enable faster KYC onboarding","To set appropriate betting limits per session","To confirm that deposited funds originate from legitimate, explainable sources — preventing the platform from being used to launder criminal proceeds"],ans:3,exp:"SOF verification is an Enhanced Due Diligence (EDD) measure requiring high-value players to evidence the origin of their funds (e.g. payslips, bank statements, tax returns). It is mandated for VIP customers by regulators including the UKGC and MGA, and is a primary AML control in iGaming compliance frameworks."},
+    ],
+    advanced:[
+      {q:"An analyst identifies 14 linked accounts across a platform, each claiming sign-up bonuses and withdrawing immediately. All share a VPN exit node but show different device fingerprints. What is the most likely fraud methodology?",opts:["Affiliate fraud exploiting the platform's referral programme","Chargeback fraud — each account intends to dispute its deposit","Coordinated bonus abuse using device emulation or virtual machines to spoof fingerprints","Responsible gaming indicators consistent with compulsive gambling behaviour"],ans:2,exp:"VPN use combined with multiple accounts, consistent bonus patterns, and varying device fingerprints is characteristic of organised bonus abuse using device emulators or virtual machine instances. The response requires IP-level blocking, fingerprint blacklisting, a full account review, and potential SAR filing if the scale suggests systematic organised fraud."},
+      {q:"A risk analyst reviews a player who has bet 600+ times per day for 12 months with a net loss of only 0.3% of total deposits. What is the primary compliance concern?",opts:["The player has an unusually high win rate indicating collusion with staff","The player qualifies for VIP status and enhanced service","The pattern is consistent with bonus abuse requiring account restriction","The extremely high volume with near-zero net loss suggests the platform is being used as a transaction layering vehicle rather than for genuine gambling"],ans:3,exp:"A near-zero net loss across extremely high transaction volume is a hallmark money laundering indicator. The player is moving funds through the platform — accepting a minimal 'laundering cost' — rather than genuinely gambling. This pattern warrants immediate EDD, transaction review, and a SAR filing."},
+      {q:"A gaming operator suspects money laundering activity. Which standard applies to their SAR filing obligation?",opts:["The operator must have proof beyond reasonable doubt before filing","Filing is triggered only when the customer has a prior criminal conviction","SAR filing is optional and based on operator discretion","The operator must file when they know, suspect, or have reasonable grounds to suspect that funds are related to criminal activity — proof is not required"],ans:3,exp:"The SAR filing threshold is reasonable suspicion, not proven guilt. Operators are legally obligated to file when suspicion arises — and must not inform the customer that a SAR has been or may be filed, as this constitutes the criminal offence of tipping off under most AML legislation."},
+      {q:"What distinguishes 'gnoming' from standard multi-accounting fraud?",opts:["Gnoming uses a single device with multiple browser profiles","Gnoming is a form of chargeback fraud exclusive to mobile platforms","Gnoming refers only to account sharing between verified family members","Gnoming recruits third parties to open accounts using their real verified identities — bypassing KYC and device fingerprinting controls that would detect standard multi-accounting"],ans:3,exp:"Gnoming is a sophisticated multi-accounting variant where a fraudster recruits real individuals to create accounts under their own identities. Each account passes KYC independently, making it significantly harder to detect than standard multi-accounting. Detection requires behavioural analytics, payment method cross-referencing, and network analysis across accounts."},
+      {q:"An MGA-licensed platform identifies a high-value player from a FATF grey-listed jurisdiction requesting a large withdrawal after a period of high-frequency, low-margin betting. What is the most appropriate compliance response?",opts:["Process the withdrawal — the customer passed initial KYC onboarding","Immediately terminate the account and refuse withdrawal without further investigation","Escalate only if the amount exceeds the jurisdiction's statutory reporting threshold","Apply EDD including Source of Funds and Source of Wealth verification, review transaction patterns, place a withdrawal hold pending review, and file a SAR if suspicion cannot be resolved"],ans:3,exp:"This scenario presents compounding high-risk factors: FATF grey-listed jurisdiction, high-value withdrawal, and a suspicious low-margin betting pattern. MGA regulations require EDD in these circumstances. Arbitrary termination without investigation breaches AML obligations and — if the reason is disclosed to the customer — may constitute tipping off. The SAR must be filed if reasonable suspicion persists after review."},
+    ]
+  }
+};
+
+// ---- STATE ----
+let cfg = {cat:'crypto',diff:'beginner',count:10};
+let state = {qs:[],idx:0,score:0,timerId:null,timeLeft:15,totalTime:0,answered:false};
+
+// ---- UI HELPERS ----
+let screenHistory = [];
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  // Show back button on all screens except home
+  document.getElementById('nav-back').classList.toggle('visible', id !== 'home');
+}
+
+function goHome(){clearTimer();screenHistory=[];show('home');}
+function showConfig(){clearTimer();screenHistory.push('home');show('config');}
+function goBack(){
+  // If currently in quiz, show pause modal instead of navigating away
+  const activeScreen = document.querySelector('.screen.active');
+  if(activeScreen && activeScreen.id === 'quiz'){
+    pauseQuiz();
+    return;
+  }
+  clearTimer();
+  const prev=screenHistory.pop();
+  if(prev)show(prev);else show('home');
+}
+
+// ---- PAUSE MODAL ----
+function pauseQuiz(){
+  clearTimer();
+  document.getElementById('pause-progress-text').textContent =
+    `${state.idx} / ${state.qs.length} answered`;
+  document.getElementById('pause-modal').classList.add('open');
+}
+function resumeQuiz(){
+  document.getElementById('pause-modal').classList.remove('open');
+  // Restart timer for current question (only if not yet answered)
+  if(!state.answered) startTimer();
+}
+function closePauseAndGo(dest){
+  document.getElementById('pause-modal').classList.remove('open');
+  clearTimer();
+  if(dest==='home'){ screenHistory=[]; show('home'); }
+  else if(dest==='config'){ screenHistory=['home']; show('config'); }
+}
+
+// ---- LAST SCORE MODAL ----
+function openScoreModal(){
+  let data=null;
+  try{const raw=localStorage.getItem('aml_last_score');if(raw)data=JSON.parse(raw);}catch(e){}
+  const box=document.getElementById('modal-content');
+  if(!data){
+    box.innerHTML=`<div class="modal-title">Last Score</div><p class="no-score" style="margin-top:8px">No score saved yet.<br>Complete a quiz to save your first result!</p><button class="btn-primary" style="margin-top:20px" onclick="closeScoreModal();showConfig()">Take a Quiz</button>`;
+  } else {
+    const date=new Date(data.date);
+    const fmt=date.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    const pct=data.pct;
+    const color=pct>=80?'var(--green)':pct>=60?'var(--cyan)':pct>=40?'var(--gold)':'#ff5252';
+    const grade=pct>=80?'Excellent 🏆':pct>=60?'Good 👍':pct>=40?'Average 📚':'Needs Work ⚠️';
+    box.innerHTML=`
+      <div class="modal-score-circle" style="border-color:${color}">
+        <div class="modal-score-num" style="color:${color}">${pct}%</div>
+      </div>
+      <div class="modal-title">${grade}</div>
+      <div class="modal-date">${fmt}</div>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <div class="modal-stat-val" style="color:var(--green)">${data.score}</div>
+          <div class="modal-stat-label">Correct</div>
+        </div>
+        <div class="modal-stat">
+          <div class="modal-stat-val" style="color:#ff5252">${data.total-data.score}</div>
+          <div class="modal-stat-label">Incorrect</div>
+        </div>
+        <div class="modal-stat" style="grid-column:1/-1">
+          <div class="modal-stat-val" style="color:var(--muted);font-size:15px">${data.score} / ${data.total} questions</div>
+          <div class="modal-stat-label">Score breakdown</div>
+        </div>
+      </div>
+      <button class="btn-primary" style="margin-bottom:8px" onclick="closeScoreModal();showConfig()">🔄 Beat This Score</button>
+    `;
+  }
+  document.getElementById('score-modal').classList.add('open');
+}
+
+function closeScoreModal(e){
+  if(e&&e.target!==document.getElementById('score-modal'))return;
+  document.getElementById('score-modal').classList.remove('open');
+}
+
+// Option buttons
+document.querySelectorAll('.option-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const grp=this.dataset.group;
+    document.querySelectorAll(`.option-btn[data-group="${grp}"]`).forEach(b=>b.classList.remove('selected'));
+    this.classList.add('selected');
+    cfg[grp]=this.dataset.val;
+  });
+});
+
+// ---- QUIZ LOGIC ----
+function startQuiz(){
+  const pool = QB[cfg.cat][cfg.diff] || QB[cfg.cat]['beginner'];
+  const count = Math.min(parseInt(cfg.count), pool.length);
+  state.qs = shuffle([...pool]).slice(0,count);
+  state.idx=0; state.score=0; state.totalTime=0;
+  screenHistory.push('config');
+  show('quiz');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q=state.qs[state.idx];
+  const total=state.qs.length;
+  state.answered=false;
+
+  document.getElementById('q-progress').textContent=`Question ${state.idx+1} of ${total}`;
+  document.getElementById('q-bar').style.width=`${((state.idx+1)/total)*100}%`;
+  document.getElementById('q-cat').textContent=cfg.cat.toUpperCase();
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-explanation').style.display='none';
+  document.getElementById('q-next').style.display='none';
+
+  const ol=document.getElementById('q-opts');
+  ol.innerHTML='';
+  const letters=['A','B','C','D'];
+  q.opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML=`<span class="opt-letter">${letters[i]}</span><span>${opt}</span>`;
+    btn.addEventListener('click',()=>answer(i));
+    ol.appendChild(btn);
+  });
+
+  startTimer();
+}
+
+function startTimer(){
+  clearTimer();
+  state.timeLeft=60;
+  updateTimerUI();
+  state.timerId=setInterval(()=>{
+    state.timeLeft--;
+    state.totalTime++;
+    updateTimerUI();
+    if(state.timeLeft<=0){clearTimer();autoFail();}
+  },1000);
+}
+
+function updateTimerUI(){
+  const el=document.getElementById('q-timer');
+  document.getElementById('timer-val').textContent=state.timeLeft;
+  el.classList.toggle('warning',state.timeLeft<=5);
+}
+
+function clearTimer(){
+  if(state.timerId){clearInterval(state.timerId);state.timerId=null;}
+}
+
+function autoFail(){
+  if(state.answered)return;
+  state.answered=true;
+  const q=state.qs[state.idx];
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.classList.add('disabled');
+    if(i===q.ans)o.classList.add('correct');
+  });
+  showExp(q,'⏱️ Time\'s up! ');
+  document.getElementById('q-next').style.display='block';
+}
+
+function answer(idx){
+  if(state.answered)return;
+  state.answered=true;
+  clearTimer();
+  const q=state.qs[state.idx];
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((o,i)=>{
+    o.classList.add('disabled');
+    if(i===q.ans)o.classList.add('correct');
+    else if(i===idx)o.classList.add('wrong');
+  });
+  if(idx===q.ans)state.score++;
+  showExp(q,idx===q.ans?'✅ Correct! ':'❌ Incorrect. ');
+  document.getElementById('q-next').style.display='block';
+}
+
+function showExp(q,prefix){
+  const el=document.getElementById('q-explanation');
+  el.style.display='block';
+  el.innerHTML=`<strong>${prefix}</strong>${q.exp}`;
+}
+
+function nextQuestion(){
+  state.idx++;
+  if(state.idx>=state.qs.length){showResults();return;}
+  renderQuestion();
+}
+
+function showResults(){
+  const total=state.qs.length;
+  const pct=Math.round((state.score/total)*100);
+  const avgTime=total>0?Math.round(state.totalTime/total):0;
+
+  document.getElementById('score-pct').textContent=pct+'%';
+  document.getElementById('score-circle').style.setProperty('--p',`${pct*3.6}deg`);
+  document.getElementById('r-correct').textContent=state.score;
+  document.getElementById('r-wrong').textContent=total-state.score;
+  document.getElementById('r-time').textContent=avgTime+'s';
+
+  let title,sub;
+  if(pct>=80){title='Excellent Work! 🏆';sub='Outstanding performance on this assessment.'}
+  else if(pct>=60){title='Good Job! 👍';sub='Solid understanding, a few areas to review.'}
+  else if(pct>=40){title='Keep Practicing 📚';sub='Review the material and try again.'}
+  else{title='Needs Improvement ⚠️';sub='Consider studying the topic before retrying.'}
+  document.getElementById('results-title').textContent=title;
+  document.getElementById('results-sub').textContent=sub;
+
+  // Save to localStorage
+  try{localStorage.setItem('aml_last_score',JSON.stringify({pct,score:state.score,total,date:new Date().toISOString()}));}catch(e){}
+  screenHistory.push('quiz');
+  show('results');
+}
+
+// ---- BACKGROUND CANVAS ----
+(function(){
+  const cv  = document.getElementById('bg-canvas');
+  const ctx = cv.getContext('2d');
+  let W=0, H=0, connCanvas=null;
+  const S=22;
+
+  function resize(){
+    W = cv.width  = cv.offsetWidth;
+    H = cv.height = cv.offsetHeight;
+    buildConnections();
+  }
+
+  function buildConnections(){
+    connCanvas = document.createElement('canvas');
+    connCanvas.width=W; connCanvas.height=H;
+    const c = connCanvas.getContext('2d');
+    const GH = H*0.60;
+    const pts=[];
+    for(let xi=0;xi*S<W;xi++)
+      for(let yi=0;yi*S<GH;yi++)
+        if((xi*7+yi*13+xi*yi)%47===0)
+          pts.push([xi*S+S/2, yi*S+S/2]);
+    c.lineWidth=0.6;
+    for(let i=0;i<pts.length;i++)
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i][0]-pts[j][0], dy=pts[i][1]-pts[j][1];
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<S*4.5){
+          const fx=1-(pts[i][0]/W)*0.72;
+          c.strokeStyle=`rgba(70,140,255,${(1-d/(S*4.5))*0.22*fx})`;
+          c.beginPath();c.moveTo(pts[i][0],pts[i][1]);c.lineTo(pts[j][0],pts[j][1]);c.stroke();
+        }
+      }
+  }
+
+  // 1. BACKGROUND — pixel-sampled colors from reference image
+  // Base #000e2b | Left blue #096ff5 | Bottom-left indigo #04004a | Top-right teal #0083a1
+  function drawBackground(){
+    ctx.fillStyle='#000e2b';
+    ctx.fillRect(0,0,W,H);
+
+    // LEFT BLUE GLOW — peak rgb(9,111,245) sampled at (120,190) of image
+    const g1=ctx.createRadialGradient(W*0.07,H*0.22,0, W*0.07,H*0.22, W*0.62);
+    g1.addColorStop(0.00,'rgba(9,111,245,0.72)');
+    g1.addColorStop(0.12,'rgba(5,75,200,0.50)');
+    g1.addColorStop(0.30,'rgba(2,40,130,0.28)');
+    g1.addColorStop(0.55,'rgba(0,15,60,0.10)');
+    g1.addColorStop(1.00,'rgba(0,0,0,0)');
+    ctx.fillStyle=g1; ctx.fillRect(0,0,W,H);
+
+    // BOTTOM-LEFT INDIGO — sampled rgb(4,0,74) along left edge, bottom
+    const g2=ctx.createRadialGradient(W*0.0,H*1.0,0, W*0.0,H*1.0, W*0.55);
+    g2.addColorStop(0.00,'rgba(8,4,90,0.85)');
+    g2.addColorStop(0.20,'rgba(6,3,65,0.55)');
+    g2.addColorStop(0.45,'rgba(3,2,35,0.22)');
+    g2.addColorStop(1.00,'rgba(0,0,0,0)');
+    ctx.fillStyle=g2; ctx.fillRect(0,0,W,H);
+
+    // TOP-RIGHT TEAL — peak rgb(0,131,161) sampled at (1650,170) of image
+    const g3=ctx.createRadialGradient(W*0.95,H*0.0,0, W*0.95,H*0.0, W*0.48);
+    g3.addColorStop(0.00,'rgba(0,131,161,0.70)');
+    g3.addColorStop(0.18,'rgba(0,100,130,0.40)');
+    g3.addColorStop(0.38,'rgba(0,60,90,0.16)');
+    g3.addColorStop(1.00,'rgba(0,0,0,0)');
+    ctx.fillStyle=g3; ctx.fillRect(0,0,W,H);
+  }
+
+  // 2. FINE DOT GRID — sampled near-white #e9ecff, 0.85px dots, fades right
+  function drawDotGrid(){
+    const GH=H*0.60;
+    for(let x=S/2;x<W;x+=S){
+      for(let y=S/2;y<GH;y+=S){
+        const fx=1-(x/W)*0.55;
+        const fy=Math.min(y/50,1)*Math.min((GH-y)/50,1);
+        const a=0.092*fx*fy;
+        if(a<0.005) continue;
+        ctx.globalAlpha=a;
+        ctx.fillStyle='#e9ecff';
+        ctx.beginPath();ctx.arc(x,y,0.85,0,6.28);ctx.fill();
+      }
+    }
+    ctx.globalAlpha=1;
+  }
+
+  // 3. BRIGHT NODES — core #f9f8fd, blue halo, left-heavy, 1 in 47 grid positions
+  function drawBrightNodes(){
+    const GH=H*0.60;
+    for(let xi=0;xi*S<W*0.85;xi++){
+      for(let yi=0;yi*S<GH;yi++){
+        if((xi*7+yi*13+xi*yi)%47!==0) continue;
+        const x=xi*S+S/2, y=yi*S+S/2;
+        if(x>W||y>GH) continue;
+        const fx=1-(x/W)*0.65;
+        const g=ctx.createRadialGradient(x,y,0,x,y,10);
+        g.addColorStop(0,`rgba(120,185,255,${0.32*fx})`);
+        g.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,10,0,6.28);ctx.fill();
+        ctx.fillStyle=`rgba(249,248,253,${0.90*fx})`;
+        ctx.beginPath();ctx.arc(x,y,1.15,0,6.28);ctx.fill();
+      }
+    }
+  }
+
+  // 4. PERSPECTIVE GRID FLOOR — faint rgba(0,100,220) lines, near-white horizon
+  function drawGrid(){
+    const HY=H*0.60, VX=W*0.50, BOT=H+5;
+    ctx.save();ctx.beginPath();ctx.rect(0,HY,W,BOT-HY);ctx.clip();
+    for(let i=0;i<=34;i++){
+      const t=i/34, bx=-W*0.55+t*W*2.1, dc=Math.abs(t-0.5)*2;
+      ctx.beginPath();ctx.moveTo(VX,HY);ctx.lineTo(bx,BOT);
+      ctx.strokeStyle=`rgba(0,100,220,${0.04+0.10*(1-dc)})`;
+      ctx.lineWidth=0.75;ctx.stroke();
+    }
+    for(let i=1;i<=20;i++){
+      const t=Math.pow(i/20,2.3), y=HY+(BOT-HY)*t;
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);
+      ctx.strokeStyle=`rgba(0,100,220,${0.022+0.20*t})`;
+      ctx.lineWidth=0.55;ctx.stroke();
+    }
+    ctx.restore();
+    // Horizon line — sampled #f4f5fa near-white
+    const hg=ctx.createLinearGradient(0,0,W,0);
+    hg.addColorStop(0,   'rgba(240,245,255,0)');
+    hg.addColorStop(0.04,'rgba(240,245,255,0.07)');
+    hg.addColorStop(0.50,'rgba(248,252,255,0.95)');
+    hg.addColorStop(0.96,'rgba(240,245,255,0.07)');
+    hg.addColorStop(1,   'rgba(240,245,255,0)');
+    ctx.strokeStyle=hg;ctx.lineWidth=1.8;
+    ctx.beginPath();ctx.moveTo(0,HY);ctx.lineTo(W,HY);ctx.stroke();
+    const bl=ctx.createLinearGradient(0,HY,0,HY+90);
+    bl.addColorStop(0,'rgba(0,80,200,0.20)');bl.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=bl;ctx.fillRect(0,HY,W,90);
+  }
+
+  // 5. CORNER GLOWS — sampled border corner colors
+  function drawCorners(){
+    const pad=18, r=16;
+    const x0=pad, y0=pad, x1=W-pad, y1=H-pad;
+    function cGlow(cx,cy,radius,color,alpha){
+      const g=ctx.createRadialGradient(cx,cy,0,cx,cy,radius);
+      g.addColorStop(0,  `rgba(${color},${alpha})`);
+      g.addColorStop(0.3,`rgba(${color},${alpha*0.42})`);
+      g.addColorStop(1,  'rgba(0,0,0,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,radius,0,6.28);ctx.fill();
+    }
+    cGlow(x0+r, y0+r, 90, '9,111,245',  0.72); // top-left: #096ff5 electric blue
+    cGlow(x1-r, y0+r, 75, '0,131,161',  0.62); // top-right: #0083a1 teal
+    cGlow(x0+r, y1-r, 70, '8,4,90',     0.55); // bottom-left: #04004a indigo
+    cGlow(x1-r, y1-r, 55, '0,80,120',   0.28); // bottom-right: subtle teal
+  }
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    drawBackground();
+    drawDotGrid();
+    if(connCanvas) ctx.drawImage(connCanvas,0,0);
+    drawBrightNodes();
+    drawGrid();
+    drawCorners();
+    requestAnimationFrame(frame);
+  }
+
+  new ResizeObserver(()=>{resize();}).observe(cv);
+  resize(); frame();
+})();
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>
