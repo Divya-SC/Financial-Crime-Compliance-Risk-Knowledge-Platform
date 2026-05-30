@@ -552,7 +552,7 @@ nav{
         <button class="option-btn selected" data-group="cat" data-val="aml">🛡️ AML</button>
         <button class="option-btn" data-group="cat" data-val="kyc">👤 Due Diligence</button>
         <button class="option-btn" data-group="cat" data-val="risk">⚠️ Risk</button>
-        <button class="option-btn" data-group="cat" data-val="msb">🏦 MSB & FinTech</button>
+        <button class="option-btn" data-group="cat" data-val="fintech">🏦 MSB & FinTech</button>
         <button class="option-btn" data-group="cat" data-val="digitalassets">🔗 Digital Assets & Blockchain</button>
         <button class="option-btn" data-group="cat" data-val="gaming">🎮 Gaming Fraud</button>
       </div>
@@ -830,15 +830,12 @@ document.querySelectorAll('.option-btn').forEach(btn=>{
 function startQuiz(){
 
   const pool = QB[cfg.cat] || [];
-
   let count;
-
   if(cfg.count === 'all'){
     count = pool.length;
   }else{
     count = Math.min(Number(cfg.count), pool.length);
   }
-
   state.qs = shuffle([...pool]).slice(0, count);
   state.idx = 0;
   state.score = 0;
@@ -856,7 +853,7 @@ function renderQuestion(){
 
   document.getElementById('q-progress').textContent = `Question ${state.idx+1} of ${total}`;
   document.getElementById('q-bar').style.width = `${((state.idx+1)/total)*100}%`;
-  const categoryNames = {aml: "AML",kyc: "DUE DILIGENCE",risk: "RISK",msb: "MSB & FINTECH",digitalassets: "DIGITAL ASSETS & BLOCKCHAIN",gaming: "GAMING FRAUD"};document.getElementById('q-cat').textContent = categoryNames[cfg.cat] || cfg.cat.toUpperCase();
+  const categoryNames = {aml: "AML",kyc: "DUE DILIGENCE",risk: "RISK",fintech: "MSB & FINTECH",digitalassets: "DIGITAL ASSETS & BLOCKCHAIN",gaming: "GAMING FRAUD"};document.getElementById('q-cat').textContent = categoryNames[cfg.cat] || cfg.cat.toUpperCase();
   document.getElementById('q-text').textContent = q.q;
   document.getElementById('q-explanation').style.display = 'none';
   document.getElementById('q-next').style.display = 'none';
