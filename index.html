@@ -131,7 +131,7 @@ nav{
   border:1px solid var(--border);
   background:rgba(10,26,53,0.8);
   font-size:12px;color:var(--cyan);
-  margin-bottom:24px;letter-spacing:0.03em;
+  margin-bottom:36px;letter-spacing:0.03em;
 }
 .home-badge svg{width:14px;height:14px;fill:none;stroke:var(--cyan);stroke-width:2}
 .home-title{
@@ -486,9 +486,9 @@ nav{
         Compliance & Financial
         Crime Scenarios
       </h1>
-      <p class="home-desc"><p class="intro">
-        Develop practical skills in AML/CFT, KYC/KYB, blockchain investigations, gaming fraud detection, and compliance risk management through interactive assessments.</p>
-      </p>
+      <p class="home-desc">
+        Develop practical skills in AML/CFT, KYC/KYB, blockchain investigations, gaming fraud detection, and compliance risk management through interactive assessments.
+        </p>
 
       <button class="btn-start" onclick="showConfig()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" stroke="none"/></svg>
@@ -497,7 +497,7 @@ nav{
       <div class="home-meta">
         <span>
           <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
-          Scenario-based questions
+          Knowledge-based questions
         </span>
         <span style="color:var(--border)">|</span>
         <span onclick="openScoreModal()" style="cursor:pointer;transition:color .2s" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color=''">
@@ -518,8 +518,8 @@ nav{
         <div class="stat-icon green">
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
-        <div class="stat-label">Difficulty Levels</div>
-        <div class="stat-val white">3</div>
+        <div class="stat-label">Learning Format</div>
+        <div class="stat-val white" style="font-size:1.3rem;">Simple</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon purple">
@@ -533,7 +533,7 @@ nav{
           <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         </div>
         <div class="stat-label">Assessment Mode</div>
-        <div class="stat-val green">Interactive</div>
+        <div class="stat-val green" style="font-size: 1.3rem;">Interactive</div>
       </div>
     </div>
   </div>
@@ -544,37 +544,32 @@ nav{
 <div id="config" class="screen">
   <div class="config-card">
     <h2 class="config-title">Configure Your Assessment</h2>
-    <p class="config-sub">Select a category, difficulty level, and question count.</p>
+    <p class="config-sub">Select a category to begin your assessment.</p>
 
     <div class="form-group">
       <label class="form-label">SELECT CATEGORY</label>
       <div class="option-grid cols2">
-        <button class="option-btn selected" data-group="cat" data-val="crypto">🔗 Cryptocurrency</button>
-        <button class="option-btn" data-group="cat" data-val="aml">🛡️ AML / CFT</button>
-        <button class="option-btn" data-group="cat" data-val="kyc">👤 KYC / KYB</button>
-        <button class="option-btn" data-group="cat" data-val="risk">⚠️ Risk Detection</button>
-        <button class="option-btn" data-group="cat" data-val="blockchain">🔍 Blockchain Investigations</button>
-        <button class="option-btn" data-group="cat" data-val="gaming">🎮 Gaming Fraud & Risk</button>
+        <button class="option-btn selected" data-group="cat" data-val="aml">🛡️ AML</button>
+        <button class="option-btn" data-group="cat" data-val="kyc">👤 Due Diligence</button>
+        <button class="option-btn" data-group="cat" data-val="risk">⚠️ Risk</button>
+        <button class="option-btn" data-group="cat" data-val="msb">🏦 MSB & FinTech</button>
+        <button class="option-btn" data-group="cat" data-val="digitalassets">🔗 Digital Assets & Blockchain</button>
+        <button class="option-btn" data-group="cat" data-val="gaming">🎮 Gaming Fraud</button>
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">DIFFICULTY LEVEL</label>
-      <div class="option-grid cols2">
-        <button class="option-btn selected" data-group="diff" data-val="beginner">🟢 Beginner</button>
-        <button class="option-btn" data-group="diff" data-val="intermediate">🟡 Intermediate</button>
-        <button class="option-btn" data-group="diff" data-val="advanced">🔴 Advanced</button>
-      </div>
-    </div>
+<!-- QUESTION COUNT -->
+ <div class="form-group">
+  <label class="form-label">NUMBER OF QUESTIONS</label>
+  <div class="option-grid cols2">
+    <button class="option-btn selected" data-group="count" data-val="all">All Questions</button>
+    <button class="option-btn" data-group="count" data-val="5">5 Questions</button>
+    <button class="option-btn" data-group="count" data-val="10">10 Questions</button>
+    <button class="option-btn" data-group="count" data-val="15">15 Questions</button>
+  </div>
+</div>
 
-    <div class="form-group">
-      <label class="form-label">NUMBER OF QUESTIONS</label>
-      <div class="option-grid" style="grid-template-columns:repeat(4,1fr)">
-        <button class="option-btn" data-group="count" data-val="5">5</button>
-      </div>
-    </div>
-
-    <button class="btn-primary" onclick="startQuiz()">🚀 Start Quiz</button>
+    <button class="btn-primary" onclick="startQuiz()">🚀 Start Assessment</button>
   </div>
 </div>
 
@@ -655,140 +650,84 @@ nav{
 <script>
 // ---- QUESTION BANK ----
 const QB = {
-  crypto:{
-    beginner:[
-      {q:"What is Bitcoin?",opts:["A government-issued digital currency","A decentralized digital currency using cryptography","A type of bank account","A stock trading platform"],ans:1,exp:"Bitcoin is the first decentralized digital currency, operating without a central authority, using cryptographic proof instead."},
-      {q:"What does 'blockchain' refer to?",opts:["A type of internet firewall","A chain of encrypted emails","A distributed ledger of transactions in blocks","A cloud storage service"],ans:2,exp:"A blockchain is a distributed ledger where transactions are grouped into blocks and linked cryptographically."},
-      {q:"What is a crypto 'wallet'?",opts:["A physical wallet with RFID chip","Software/hardware that stores private keys","A bank account for crypto","A crypto exchange account"],ans:1,exp:"A crypto wallet stores private keys that prove ownership of digital assets on the blockchain."},
-      {q:"What is a 'private key' in cryptocurrency?",opts:["A password to an exchange","A secret number that allows spending crypto","A public address for receiving funds","An API key for trading bots"],ans:1,exp:"A private key is a secret cryptographic key that authorizes transactions from your address."},
-      {q:"What is 'mining' in the context of Bitcoin?",opts:["Extracting physical coins from the ground","The process of validating transactions and creating new blocks","Buying Bitcoin at low prices","Hacking into blockchain networks"],ans:1,exp:"Mining is the process by which nodes compete to solve cryptographic puzzles to validate transactions and earn block rewards."},
-    ],
-    intermediate:[
-      {q:"What is a 'mixer' or 'tumbler' service in crypto?",opts:["A trading algorithm","A service that pools and re-distributes crypto to obscure origins","A DeFi lending protocol","A type of hardware wallet"],ans:1,exp:"Mixers pool cryptocurrency from multiple users and redistribute it to obscure the transaction trail — a major AML concern."},
-      {q:"What is a 'Layer 2' solution?",opts:["The second blockchain created","A secondary protocol built atop a base blockchain for scalability","A second wallet address","An exchange's internal ledger"],ans:1,exp:"Layer 2 solutions (e.g. Lightning Network) process transactions off-chain while settling on the main chain, improving speed and cost."},
-      {q:"What distinguishes a privacy coin like Monero from Bitcoin?",opts:["Monero has faster transactions","Monero uses obfuscation techniques to make transactions untraceable","Monero is backed by gold","Monero is centrally controlled"],ans:1,exp:"Privacy coins use techniques like ring signatures and stealth addresses to anonymize senders, recipients, and amounts."},
-      {q:"What is a 'smart contract'?",opts:["A legal PDF on blockchain","Self-executing code on a blockchain triggered by conditions","A crypto loan agreement","A compliance document for exchanges"],ans:1,exp:"Smart contracts are self-executing programs stored on a blockchain that run automatically when predefined conditions are met."},
-      {q:"What is DeFi?",opts:["Digital Finance Regulation","Decentralized Finance — financial services without intermediaries","Defense Finance Initiative","Deferred Investment Fund"],ans:1,exp:"DeFi refers to financial services (lending, trading, insurance) built on blockchains that operate without traditional intermediaries."},
-    ],
-    advanced:[
-      {q:"In the context of blockchain analytics, what is 'chain hopping'?",opts:["Moving nodes between blockchains","Converting crypto across multiple blockchains to obscure transaction trails","A consensus mechanism","A type of fork"],ans:1,exp:"Chain hopping involves moving funds across multiple blockchains using cross-chain bridges to break the transaction trail and evade monitoring."},
-      {q:"What is the 'Travel Rule' in crypto (FATF)?",opts:["Rules for crypto ATMs","Requirement for VASPs to share originator/beneficiary info for transfers above threshold","Rules for cross-border cash","A regulation for crypto mining"],ans:1,exp:"FATF's Travel Rule requires Virtual Asset Service Providers to pass originator and beneficiary information along with transfers ≥ $1,000/€1,000."},
-      {q:"What is a 'dusting attack'?",opts:["Sending large amounts of crypto to hack wallets","Sending tiny crypto amounts to deanonymize wallet clusters","A DoS attack on blockchain nodes","Flooding an exchange with orders"],ans:1,exp:"Dusting attacks send minuscule amounts of crypto to multiple wallets, then analyze how those funds move to link addresses and deanonymize users."},
-    ]
-  },
-  aml:{
-    beginner:[
-      {q:"What does AML stand for?",opts:["Asset Management Ledger","Anti-Money Laundering","Authorized Market Listing","Annual Monetary Limit"],ans:1,exp:"AML stands for Anti-Money Laundering — a set of laws, regulations, and procedures to prevent criminals from disguising illegally obtained funds."},
-      {q:"What are the three stages of money laundering?",opts:["Detection, Reporting, Recovery","Placement, Layering, Integration","Deposit, Transfer, Withdrawal","Identification, Verification, Monitoring"],ans:1,exp:"The three classic stages are Placement (introducing dirty money), Layering (disguising the trail), and Integration (reintroducing as clean funds)."},
-      {q:"What is a Suspicious Activity Report (SAR)?",opts:["A customer satisfaction survey","A report filed by financial institutions about suspected illegal activity","An annual regulatory audit","A security incident report"],ans:1,exp:"A SAR is a report filed with financial intelligence units (like FinCEN) when a financial institution suspects money laundering or other financial crimes."},
-      {q:"What is the Financial Action Task Force (FATF)?",opts:["A UN peacekeeping body","An intergovernmental body setting global AML/CFT standards","A central banking regulator","A crypto exchange consortium"],ans:1,exp:"FATF is an intergovernmental body that sets international standards and promotes effective implementation of measures to combat money laundering and terrorist financing."},
-      {q:"What does CFT stand for in AML/CFT?",opts:["Certified Financial Trader","Countering the Financing of Terrorism","Central Fund Transfer","Currency Flow Tracking"],ans:1,exp:"CFT stands for Countering the Financing of Terrorism — the complement to AML that focuses on preventing funds from reaching terrorist organizations."},
-    ],
-    intermediate:[
-      {q:"What is 'structuring' (also known as 'smurfing')?",opts:["Organizing a compliance team","Breaking large transactions into smaller ones to evade reporting thresholds","Structuring a loan agreement","Creating shell companies"],ans:1,exp:"Structuring involves deliberately breaking large sums into smaller transactions to avoid currency transaction reporting thresholds — a federal crime in many jurisdictions."},
-      {q:"What is a Politically Exposed Person (PEP)?",opts:["A marketing influencer","An individual who holds or has held a prominent public function","A high-net-worth retail investor","A licensed financial advisor"],ans:1,exp:"PEPs are individuals who hold or have held senior public roles (heads of state, senior politicians, military officials) and their families/close associates, requiring enhanced due diligence."},
-      {q:"What is a Correspondent Banking relationship?",opts:["A bank that handles mail services","A bank providing services to another bank, facilitating cross-border transactions","A bank's customer service department","A regulatory reporting relationship"],ans:1,exp:"Correspondent banking is when one bank (correspondent) provides services to another (respondent) to execute cross-border transactions — a major AML risk vector."},
-      {q:"What does a Risk-Based Approach (RBA) to AML mean?",opts:["Using AI for compliance","Allocating AML resources proportional to assessed risk levels","Rejecting all high-risk customers","Filing SARs for all transactions"],ans:1,exp:"An RBA means identifying and assessing ML/TF risks and applying resources proportionately — more scrutiny on higher-risk customers, products, and geographies."},
-      {q:"What is a 'shell company' in AML context?",opts:["A company that sells shell products","A legal entity with no real operations used to hide ownership","A startup in the oil industry","A licensed money service business"],ans:1,exp:"Shell companies are legal entities that exist primarily on paper with no real operations, often used to obscure beneficial ownership and move illicit funds."},
-    ],
-    advanced:[
-      {q:"What is 'trade-based money laundering' (TBML)?",opts:["Money laundering through stock trades","Manipulating international trade invoices to transfer value across borders","Insider trading schemes","Laundering through commodity futures"],ans:1,exp:"TBML involves over/under-invoicing of goods, multiple invoicing, or misrepresentation of goods in trade documents to move value across borders and launder proceeds."},
-      {q:"Under FATF Recommendation 16, what must VASPs transmit?",opts:["Transaction fees","Originator and beneficiary information for virtual asset transfers","Only beneficiary information","Only for transfers over $10,000"],ans:1,exp:"FATF Recommendation 16 (Travel Rule) requires VASPs to obtain and transmit originator name, account, address AND beneficiary name and account for crypto transfers ≥ $1,000."},
-      {q:"What is 'de-risking' in the banking sector?",opts:["Reducing investment portfolio risk","Banks exiting high-risk customer segments to avoid regulatory scrutiny","Hedging currency exposure","Increasing collateral requirements"],ans:1,exp:"De-risking is the practice of financial institutions avoiding or exiting entire categories of customers or business lines deemed too costly to manage from an AML/compliance perspective."},
-    ]
-  },
-  kyc:{
-    beginner:[
-      {q:"What does KYC stand for?",opts:["Keep Your Credentials","Know Your Customer","Key Year Certification","Keep Your Crypto"],ans:1,exp:"KYC stands for Know Your Customer — the process of verifying the identity of clients as required by regulations."},
-      {q:"What is the primary purpose of CDD (Customer Due Diligence)?",opts:["To improve customer service","To verify customer identity and assess risk","To offer personalized products","To speed up onboarding"],ans:1,exp:"CDD involves verifying customer identity, understanding the nature of their business, and assessing the risk of money laundering or terrorist financing."},
-      {q:"What is Enhanced Due Diligence (EDD)?",opts:["A standard ID verification","Additional scrutiny applied to higher-risk customers like PEPs","A simplified onboarding process","A type of background check for employees"],ans:1,exp:"EDD is a more rigorous level of KYC applied to high-risk customers (PEPs, high-risk jurisdictions, complex structures) requiring deeper investigation and ongoing monitoring."},
-      {q:"What is 'beneficial ownership'?",opts:["The legal owner of a property","The natural person(s) who ultimately own or control a legal entity","A beneficiary in a will","The shareholder with most shares"],ans:1,exp:"Beneficial ownership refers to the natural person(s) who ultimately own or control a legal entity, even if ownership is held through intermediaries."},
-      {q:"What document is typically required for individual KYC?",opts:["Credit score","Government-issued photo ID and proof of address","Bank statement only","Employment contract"],ans:1,exp:"Standard individual KYC typically requires a government-issued photo ID (passport, national ID, driver's license) and proof of address (utility bill, bank statement)."},
-    ],
-    intermediate:[
-      {q:"What is KYB (Know Your Business)?",opts:["A CRM software category","Due diligence on business entities, verifying ownership, structure, and legitimacy","A credit scoring model","A type of business license"],ans:1,exp:"KYB extends KYC principles to business customers — verifying legal registration, beneficial ownership, directors, and the legitimacy of the business."},
-      {q:"What is a Simplified Due Diligence (SDD) scenario?",opts:["Due diligence on small transactions","Reduced KYC measures applied when risk is demonstrably low","A one-page KYC form","Self-certification without documentation"],ans:1,exp:"SDD applies when ML/TF risk is assessed as low (e.g. publicly listed companies, regulated institutions) — reduced documentation and monitoring may be appropriate."},
-      {q:"What is 'perpetual KYC' (pKYC)?",opts:["KYC done every year","Continuous, event-triggered customer monitoring rather than periodic reviews","A blockchain-based KYC system","A government KYC database"],ans:1,exp:"Perpetual KYC is a continuous approach to customer due diligence, triggering re-verification based on risk events or profile changes rather than fixed periodic reviews."},
-      {q:"What is liveness detection in digital KYC?",opts:["Checking if a customer is alive using public records","Technology that verifies a real person is present during biometric verification","A video interview process","An AI customer service tool"],ans:1,exp:"Liveness detection uses AI/biometrics to verify that the person submitting an identity document during digital onboarding is physically present and not a photo or video."},
-      {q:"What does UBO stand for in KYB?",opts:["Unified Business Operator","Ultimate Beneficial Owner","Underwriter's Business Office","Unregistered Business Organization"],ans:1,exp:"UBO stands for Ultimate Beneficial Owner — the natural person who ultimately owns or controls 25%+ of a company (threshold varies by jurisdiction)."},
-    ],
-    advanced:[
-      {q:"Under the EU's 5th Anti-Money Laundering Directive (5AMLD), what was a key change regarding crypto?",opts:["Crypto was banned in the EU","Crypto exchanges and wallet providers were brought under AML/CFT obligations","All crypto transactions were capped at €1,000","KYC was made optional for crypto"],ans:1,exp:"5AMLD (2020) brought crypto-asset exchanges and custodian wallet providers within the scope of EU AML obligations for the first time, requiring CDD and SAR filing."},
-      {q:"What is 'eKYC' and what are its regulatory challenges?",opts:["Electronic key management","Digital identity verification — challenges include cross-border recognition and data privacy","Email-based KYC — challenges include phishing","A government database — challenges include access costs"],ans:1,exp:"eKYC is fully digital identity verification using biometrics, document scanning, and database checks. Key challenges include varying regulatory acceptance, GDPR compliance, and deepfake fraud."},
-    ]
-  },
-  risk:{
-    beginner:[
-      {q:"What is a 'red flag' in financial crime compliance?",opts:["A transaction flag in bank systems","An indicator that may suggest suspicious activity requiring investigation","A regulatory penalty notice","A type of compliance report"],ans:1,exp:"Red flags are indicators or warning signs that may suggest potential financial crime, prompting further investigation rather than immediate conclusion of guilt."},
-      {q:"What is a customer risk rating?",opts:["A credit score","A classification of a customer's ML/TF risk level based on various factors","A customer satisfaction score","A fraud detection score"],ans:1,exp:"A customer risk rating categorizes customers (Low/Medium/High) based on factors like geography, products used, transaction patterns, and entity type to determine CDD intensity."},
-      {q:"What does 'transaction monitoring' refer to in AML?",opts:["Auditing employee transactions","Automated surveillance of customer transactions to detect suspicious patterns","Monitoring market prices","Reviewing loan applications"],ans:1,exp:"Transaction monitoring is an automated process that analyzes customer transaction data in real-time or retrospectively to flag patterns indicative of financial crime."},
-      {q:"What is a 'high-risk jurisdiction'?",opts:["A country with high taxes","A country identified as having significant AML/CFT deficiencies","A country with high inflation","A country with many crypto exchanges"],ans:1,exp:"High-risk jurisdictions are countries identified (e.g. by FATF's grey/black list) as having strategic deficiencies in their AML/CFT frameworks, requiring enhanced scrutiny."},
-      {q:"What is adverse media screening?",opts:["Blocking negative news about your company","Checking customers against negative news sources for crime, fraud, or sanctions connections","Monitoring competitor press coverage","Social media marketing analysis"],ans:1,exp:"Adverse media screening involves checking customers against news databases, court records, and other sources for negative information suggesting financial crime or reputational risk."},
-    ],
-    intermediate:[
-      {q:"What is 'false positive' in transaction monitoring?",opts:["An alert correctly identifying fraud","An alert flagging legitimate activity as suspicious","A missed fraud transaction","A duplicate transaction alert"],ans:1,exp:"A false positive is a transaction monitoring alert that flags a legitimate customer transaction as suspicious, requiring investigation before clearing — high false positive rates waste resources."},
-      {q:"What is sanctions screening?",opts:["Checking government grants eligibility","Checking customers/transactions against sanctions lists (OFAC, UN, EU) to avoid prohibited dealings","A regulatory audit process","A credit risk assessment"],ans:1,exp:"Sanctions screening involves checking customers, transactions, and counterparties against sanctions lists (OFAC SDN, EU Consolidated List, UN Security Council) to prevent prohibited dealings."},
-      {q:"What is 'typology' in financial crime?",opts:["A study of fonts used in compliance documents","A documented pattern or method used to commit financial crime","A customer segmentation technique","A statistical analysis method"],ans:1,exp:"Typologies are documented schemes or methods used to commit money laundering or terrorist financing, published by bodies like FATF to help institutions recognize common patterns."},
-      {q:"What is 'layering risk' in transaction monitoring?",opts:["Risk from operating on multiple software layers","Risk of clients using complex transaction chains to obscure fund origins","Network infrastructure risk","Multi-currency conversion risk"],ans:1,exp:"Layering risk refers to the risk that customers use complex chains of transactions, transfers, or currency conversions to obscure the origin of illicit funds during the layering stage."},
-      {q:"What is a Name Screening false negative?",opts:["Screening a name multiple times","Failing to match a sanctioned or PEP name due to transliteration or alias variations","A correctly cleared alert","Blocking a legitimate customer by mistake"],ans:1,exp:"A false negative in name screening occurs when a sanctioned individual or PEP passes screening undetected, often due to name spelling variations, aliases, or transliteration differences."},
-    ],
-    advanced:[
-      {q:"What is a 'network analysis' approach in financial crime detection?",opts:["Analyzing bank IT networks for security","Mapping relationships between accounts, entities, and transactions to identify criminal networks","Analyzing social media networks","Monitoring financial news networks"],ans:1,exp:"Network analysis maps connections between accounts, individuals, and transactions to identify hidden relationships and criminal networks, revealing patterns invisible in single-account analysis."},
-      {q:"What is 'contextual integrity' in data-driven AML?",opts:["Ensuring database integrity","The principle that data flows should match the norms of the context in which data was collected","A data encryption standard","A regulatory data retention requirement"],ans:1,exp:"Contextual integrity holds that personal data should flow according to the norms of the context where it was collected — relevant to AML data sharing between institutions and jurisdictions."},
-    ]
-  }
-,
-  blockchain:{
-    beginner:[
-      {q:"What is a TXID (Transaction ID) on a blockchain?",opts:["A wallet's public address","A smart contract identifier","A unique identifier for a specific blockchain transaction","A miner's reward reference"],ans:2,exp:"A TXID uniquely identifies every transaction recorded on a blockchain. It is typically the starting point of any blockchain investigation and can be viewed on a block explorer."},
-      {q:"Which type of tool allows investigators to view on-chain transactions publicly?",opts:["A CRM platform","A blockchain explorer","A network firewall","A spreadsheet application"],ans:1,exp:"Blockchain explorers such as Etherscan, Tronscan, Solscan, and Blockchair allow anyone to view transaction history, wallet balances, and fund flows on public blockchains."},
-      {q:"What does 'wallet attribution' mean in a blockchain investigation context?",opts:["Transferring funds to a new wallet","Encrypting a private key","Generating a fresh wallet address","Identifying the real-world entity or service that controls a specific wallet address"],ans:3,exp:"Wallet attribution links an anonymous on-chain address to a real-world entity — such as an exchange, criminal group, or individual. It is a core technique used in blockchain intelligence and law enforcement."},
-      {q:"What is the primary objective of fund flow analysis?",opts:["Estimating the current market price of tokens","Calculating block rewards for miners","Generating new wallet addresses","Tracing how funds move between blockchain addresses to map the complete fund journey"],ans:3,exp:"Fund flow analysis maps the movement of cryptocurrency from source through intermediary addresses to final destination, helping investigators identify laundering patterns and recover illicit proceeds."},
-      {q:"A wallet receives cryptocurrency directly from a sanctioned address. What is the correct immediate compliance response?",opts:["Ignore it as a single transaction is insufficient to act on","Delete the transaction records","Close the blockchain network","Document the exposure and escalate to the compliance team for investigation and potential SAR filing"],ans:3,exp:"Any confirmed exposure to a sanctioned wallet address must be documented and escalated immediately. This may trigger regulatory reporting obligations regardless of the transaction amount, and delayed action could constitute a sanctions violation."},
-    ],
-    intermediate:[
-      {q:"Which on-chain transaction pattern is most consistent with the layering stage of money laundering?",opts:["Long-term holding of assets in cold storage","Receiving regular payroll transfers on-chain","Making periodic stablecoin purchases","Rapidly sending funds through multiple wallets in quick succession to obscure the origin"],ans:3,exp:"Rapid sequential transfers through chains of wallets — especially when amounts change slightly at each hop — are a textbook layering pattern. The objective is to sever the link between the criminal origin and the eventual destination."},
-      {q:"What is 'chain hopping' and why is it used by criminals?",opts:["Mining across multiple blockchains simultaneously","Frequently changing wallet seed phrases","Issuing new tokens on different networks","Moving assets across multiple blockchains via bridges to fragment the transaction trail and hinder investigators"],ans:3,exp:"Chain hopping exploits the siloed nature of blockchain analytics tools. By moving funds from Ethereum to BNB Chain to Tron via cross-chain bridges, criminals complicate tracing and force investigators to work across multiple analytics platforms."},
-      {q:"Why are crypto mixers and tumblers treated as high-risk services under AML frameworks?",opts:["They significantly increase transaction fees","They operate as unregulated exchanges","They issue synthetic tokens","They deliberately obscure the origin and destination of funds, undermining AML transaction monitoring"],ans:3,exp:"Mixers pool funds from multiple users and redistribute equivalent amounts to different addresses. This is designed to make it impossible to link specific inputs to outputs — a direct obstruction of AML controls and the reason OFAC has sanctioned services like Tornado Cash."},
-      {q:"Which blockchain analytics technique is used to group addresses likely controlled by the same entity?",opts:["Proof-of-work mining","Token liquidity farming","Yield optimisation strategies","Wallet clustering, using heuristics such as common-input-ownership analysis"],ans:3,exp:"Wallet clustering uses analytical heuristics — primarily common-input-ownership (all inputs in a transaction share a controller) and change address detection — to group addresses under a single controlling entity. This is used by tools such as Chainalysis, Elliptic, and TRM Labs."},
-      {q:"An investigator observes funds split from one wallet into 15 sub-wallets, which then reconsolidate at a single exchange deposit address. What stage of money laundering is this most consistent with?",opts:["Placement — introducing criminal proceeds into the financial system","Structuring — breaking transactions below reporting thresholds","Integration — reintroducing laundered funds as legitimate assets","Layering — using complex on-chain transactions to obscure the origin of funds"],ans:3,exp:"The split-and-consolidate pattern across multiple wallets is a layering technique. It creates multiple transaction hops between criminal origin and final deposit point, increasing the investigative effort required to trace the funds."},
-    ],
-    advanced:[
-      {q:"A wallet sends funds through Tornado Cash then immediately deposits to a regulated exchange. What is the primary compliance concern for the exchange?",opts:["The transaction may indicate wash trading activity","The customer may have incurred excessive gas fees","The deposit could represent a sanctions violation and an attempt to conceal the source of funds, requiring immediate SAR consideration","The deposited token may exhibit high price volatility"],ans:2,exp:"Tornado Cash is an OFAC-sanctioned mixer. Funds flowing through it prior to exchange deposit represent both a sanctions risk and a strong indicator of source-of-funds concealment. The exchange must treat this as a high-risk alert, apply EDD, and file a SAR if suspicion cannot be resolved — regardless of the amount."},
-      {q:"Which FATF Recommendation specifically governs the Travel Rule for virtual asset transfers?",opts:["FATF Recommendation 10 — Customer Due Diligence","FATF Recommendation 20 — Suspicious Transaction Reporting","FATF Recommendation 6 — Targeted Financial Sanctions","FATF Recommendation 16 — Wire Transfers, extended to VASPs"],ans:3,exp:"FATF Recommendation 16 (the Travel Rule) requires VASPs to collect and transmit originator and beneficiary name, account identifier, and — for unhosted wallets — additional information for all virtual asset transfers at or above USD/EUR 1,000."},
-      {q:"You identify 40+ wallets sharing common UTXO inputs across multiple transactions. Which analytical heuristic supports their attribution to a single controlling entity?",opts:["Change address heuristic","Zero-knowledge proof analysis","First-in-first-out (FIFO) accounting","Common-input-ownership heuristic"],ans:0,exp:"The common-input-ownership heuristic assumes that all addresses providing inputs to a single transaction are controlled by the same entity. This is the foundational clustering technique used across major blockchain intelligence platforms and is particularly effective in UTXO-based chains like Bitcoin."},
-      {q:"What distinguishes a 'peel chain' transaction pattern from standard multi-hop layering?",opts:["Peel chains settle off-chain between hops","Peel chains only occur on privacy-focused blockchains","Each hop in a peel chain sends the entire balance to a new address","Each hop peels off a small amount to a destination address while forwarding the remaining majority onward — creating an extended, resource-intensive trail"],ans:3,exp:"A peel chain progressively strips small amounts at each hop while moving the bulk of funds further down the chain. This creates a long, branching transaction trail that is difficult to trace manually and is commonly used to obscure the final destination of illicit funds."},
-      {q:"An exchange receives a withdrawal to a wallet associated with a known ransomware operator. The customer claims it is their personal cold wallet. What is the correct compliance response?",opts:["Process the withdrawal — the customer has provided a plausible explanation","Report only if the amount exceeds the local mandatory reporting threshold","Refuse all future business immediately without conducting an investigation","Pause the transaction, apply EDD, document the finding, escalate to compliance, and file a SAR — customer explanations do not override compliance obligations"],ans:3,exp:"A ransomware-flagged wallet address is a critical risk indicator regardless of the customer's explanation. The correct response is to halt the transaction, apply enhanced due diligence, and escalate. Unilateral refusal without investigation — and disclosing the reason to the customer — could constitute tipping off, which is itself a criminal offence in most jurisdictions."},
-    ]
-  },
-  gaming:{
-    beginner:[
-      {q:"What is bonus abuse on an online gaming platform?",opts:["A platform offering disproportionately large welcome bonuses","Cancelling bonus offers after they have been accepted","A technical miscalculation in the bonus engine","Exploiting promotional offers to gain unfair financial advantage, often through multiple accounts"],ans:3,exp:"Bonus abuse involves fraudsters creating multiple accounts or identifying loopholes to repeatedly claim promotional rewards. It is a significant direct cost to operators and is frequently used as a low-friction entry point for money laundering."},
-      {q:"What is multi-accounting on a gaming platform?",opts:["Managing separate accounts for different game types","Using multiple payment methods on a single account","Sharing a family account across multiple devices","One individual operating several accounts in violation of platform terms and conditions"],ans:3,exp:"Multi-accounting allows fraudsters to circumvent bonus restrictions, self-exclusion lists, and stake limits. Detection relies on device fingerprinting, IP matching, behavioural analytics, and document verification cross-referencing."},
-      {q:"What is an Account Takeover (ATO) attack?",opts:["A player transferring account ownership voluntarily","Closing and reopening a dormant account","Upgrading a standard account to VIP status","Unauthorised access to another user's account, typically to extract funds, bonuses, or use it for fraud"],ans:3,exp:"ATO attacks use credential stuffing, phishing, or SIM swapping to compromise accounts. Once inside, attackers may withdraw balances, redeem bonuses, or use the account as a mule to layer illicit funds through gaming activity."},
-      {q:"Which of the following represents the strongest fraud indicator on a gaming platform?",opts:["A player depositing via a credit card","A player submitting identity verification documents","Consistent gameplay patterns over several months","Multiple accounts registered from the same IP address or device fingerprint"],ans:3,exp:"Shared IP addresses or device fingerprints across multiple accounts is a primary multi-accounting indicator. Legitimate players rarely share devices or network infrastructure with other registered accounts, making this a high-confidence fraud signal."},
-      {q:"Which team is primarily responsible for investigating suspicious transactions on a regulated gaming platform?",opts:["The marketing department","The software development team","The customer support team","The fraud, risk, or compliance team"],ans:3,exp:"Fraud, Risk, and Compliance teams conduct transaction monitoring, AML investigations, and file Suspicious Activity Reports on gaming platforms. This function is growing rapidly as regulators — including the UK Gambling Commission and Malta Gaming Authority — increase AML requirements for iGaming operators."},
-    ],
-    intermediate:[
-      {q:"What is chargeback fraud in online gaming, and why is it difficult to prevent?",opts:["A payment provider reversing a failed deposit due to a technical error","An operator withholding a legitimate withdrawal","A player requesting a valid refund after a provably unfair game outcome","A player using deposited funds then disputing the charge with their bank — obtaining both the gaming service and a refund"],ans:3,exp:"Chargeback fraud, also called 'friendly fraud', results in direct financial loss for the operator. It is difficult to prevent because payment networks generally favour the cardholder, and operators must retain strong evidence of service delivery to win disputes."},
-      {q:"Why is device fingerprinting a critical tool in gaming fraud prevention?",opts:["It stores encrypted account passwords","It accelerates withdrawal processing times","It improves the visual rendering of games","It creates a unique device signature from browser, hardware, and software attributes — enabling detection of multi-accounting and returning banned users"],ans:3,exp:"Device fingerprinting collects attributes including browser type, screen resolution, installed fonts, hardware IDs, and WebGL renderer to create a near-unique identifier. This enables platforms to detect returning users who have changed their name, email, or IP address."},
-      {q:"What is collusion in online gaming and why does it raise AML concerns?",opts:["Operators sharing player data with affiliates","A platform partnering with payment providers on preferential rates","Players sharing game strategy tips on public forums","Multiple players secretly coordinating to manipulate outcomes — and potentially using gameplay to layer illicit funds between accounts"],ans:3,exp:"Collusion occurs primarily in peer-vs-peer games such as poker and fantasy sports. Beyond the sporting integrity issue, it serves as a layering mechanism: one player deliberately loses to a co-conspirator, who collects the 'winnings' — creating a legitimate-appearing payout trail for illicit funds."},
-      {q:"A player deposits large sums, places minimal low-risk bets, and withdraws quickly. What does this pattern indicate to a risk analyst?",opts:["The player is a professional gambler eligible for VIP upgrade","A responsible gaming issue requiring welfare intervention","A player testing new deposit methods","Potential use of the platform to layer funds — using gameplay as a veneer of legitimacy while minimising gambling exposure"],ans:3,exp:"The deposit-minimal play-withdraw cycle is one of the most documented gaming money laundering typologies. The criminal accepts a small net loss on bets as the 'cost' of laundering, and the subsequent withdrawal carries the appearance of legitimate gambling winnings."},
-      {q:"Why is Source of Funds (SOF) verification required for high-value gaming customers?",opts:["To offer personalised game recommendations","To enable faster KYC onboarding","To set appropriate betting limits per session","To confirm that deposited funds originate from legitimate, explainable sources — preventing the platform from being used to launder criminal proceeds"],ans:3,exp:"SOF verification is an Enhanced Due Diligence (EDD) measure requiring high-value players to evidence the origin of their funds (e.g. payslips, bank statements, tax returns). It is mandated for VIP customers by regulators including the UKGC and MGA, and is a primary AML control in iGaming compliance frameworks."},
-    ],
-    advanced:[
-      {q:"An analyst identifies 14 linked accounts across a platform, each claiming sign-up bonuses and withdrawing immediately. All share a VPN exit node but show different device fingerprints. What is the most likely fraud methodology?",opts:["Affiliate fraud exploiting the platform's referral programme","Chargeback fraud — each account intends to dispute its deposit","Coordinated bonus abuse using device emulation or virtual machines to spoof fingerprints","Responsible gaming indicators consistent with compulsive gambling behaviour"],ans:2,exp:"VPN use combined with multiple accounts, consistent bonus patterns, and varying device fingerprints is characteristic of organised bonus abuse using device emulators or virtual machine instances. The response requires IP-level blocking, fingerprint blacklisting, a full account review, and potential SAR filing if the scale suggests systematic organised fraud."},
-      {q:"A risk analyst reviews a player who has bet 600+ times per day for 12 months with a net loss of only 0.3% of total deposits. What is the primary compliance concern?",opts:["The player has an unusually high win rate indicating collusion with staff","The player qualifies for VIP status and enhanced service","The pattern is consistent with bonus abuse requiring account restriction","The extremely high volume with near-zero net loss suggests the platform is being used as a transaction layering vehicle rather than for genuine gambling"],ans:3,exp:"A near-zero net loss across extremely high transaction volume is a hallmark money laundering indicator. The player is moving funds through the platform — accepting a minimal 'laundering cost' — rather than genuinely gambling. This pattern warrants immediate EDD, transaction review, and a SAR filing."},
-      {q:"A gaming operator suspects money laundering activity. Which standard applies to their SAR filing obligation?",opts:["The operator must have proof beyond reasonable doubt before filing","Filing is triggered only when the customer has a prior criminal conviction","SAR filing is optional and based on operator discretion","The operator must file when they know, suspect, or have reasonable grounds to suspect that funds are related to criminal activity — proof is not required"],ans:3,exp:"The SAR filing threshold is reasonable suspicion, not proven guilt. Operators are legally obligated to file when suspicion arises — and must not inform the customer that a SAR has been or may be filed, as this constitutes the criminal offence of tipping off under most AML legislation."},
-      {q:"What distinguishes 'gnoming' from standard multi-accounting fraud?",opts:["Gnoming uses a single device with multiple browser profiles","Gnoming is a form of chargeback fraud exclusive to mobile platforms","Gnoming refers only to account sharing between verified family members","Gnoming recruits third parties to open accounts using their real verified identities — bypassing KYC and device fingerprinting controls that would detect standard multi-accounting"],ans:3,exp:"Gnoming is a sophisticated multi-accounting variant where a fraudster recruits real individuals to create accounts under their own identities. Each account passes KYC independently, making it significantly harder to detect than standard multi-accounting. Detection requires behavioural analytics, payment method cross-referencing, and network analysis across accounts."},
-      {q:"An MGA-licensed platform identifies a high-value player from a FATF grey-listed jurisdiction requesting a large withdrawal after a period of high-frequency, low-margin betting. What is the most appropriate compliance response?",opts:["Process the withdrawal — the customer passed initial KYC onboarding","Immediately terminate the account and refuse withdrawal without further investigation","Escalate only if the amount exceeds the jurisdiction's statutory reporting threshold","Apply EDD including Source of Funds and Source of Wealth verification, review transaction patterns, place a withdrawal hold pending review, and file a SAR if suspicion cannot be resolved"],ans:3,exp:"This scenario presents compounding high-risk factors: FATF grey-listed jurisdiction, high-value withdrawal, and a suspicious low-margin betting pattern. MGA regulations require EDD in these circumstances. Arbitrary termination without investigation breaches AML obligations and — if the reason is disclosed to the customer — may constitute tipping off. The SAR must be filed if reasonable suspicion persists after review."},
-    ]
-  }
-};
+  "aml":
+  [
+    {q:"What does AML stand for?",opts:["Asset Management Ledger","Anti-Money Laundering","Authorized Market Listing","Annual Monetary Limit"],ans:1,exp:"AML stands for Anti-Money Laundering. It refers to the laws, regulations, policies, and controls designed to detect, prevent, and report attempts to disguise the proceeds of criminal activity as legitimate funds."},
+    {q:"What are the three stages of money laundering?",opts:["Detection, Reporting, Recovery","Placement, Layering, Integration","Deposit, Transfer, Withdrawal","Identification, Verification, Monitoring"],ans:1,exp:"The three traditional stages of money laundering are:1. Placement – Introducing illicit funds into the financial system.2. Layering – Moving funds through complex transactions to obscure their origin.3. Integration – Reintroducing the funds into the legitimate economy as apparently lawful assets."},
+    {q:"What is a Suspicious Activity Report (SAR)?",opts:["A customer satisfaction survey","A report filed by financial institutions about suspected illegal activity","An annual regulatory audit","A security incident report"],ans:1,exp:"A Suspicious Activity Report (SAR) is a regulatory report submitted to the relevant Financial Intelligence Unit (FIU) when a financial institution knows, suspects, or has reasonable grounds to suspect that funds or transactions may be linked to money laundering, terrorist financing, fraud, sanctions evasion, or other criminal activity."},
+    {q:"What is the Financial Action Task Force (FATF)?",opts:["A UN peacekeeping body","An intergovernmental body setting global AML/CFT standards","A central banking regulator","A crypto exchange consortium"],ans:1,exp:"FATF is an intergovernmental organization established in 1989 that develops global AML/CFT standards and recommendations. Its guidance influences regulations adopted by countries, financial institutions, VASPs, and other regulated entities worldwide."},
+    {q:"What does CFT stand for in AML/CFT?",opts:["Certified Financial Trader","Countering the Financing of Terrorism","Central Fund Transfer","Currency Flow Tracking"],ans:1,exp:"CFT stands for Countering the Financing of Terrorism. It refers to laws, regulations, and controls designed to detect, prevent, and disrupt the collection, movement, and use of funds intended to support terrorist individuals, groups, or activities. AML and CFT frameworks are commonly implemented together under global standards such as those issued by FATF."},
+    {q:"What is 'structuring' (also known as 'smurfing')?",opts:["Organizing a compliance team","Breaking large transactions into smaller ones to evade reporting thresholds","Structuring a loan agreement","Creating shell companies"],ans:1,exp:"Structuring (or smurfing) is the deliberate division of a large transaction into multiple smaller transactions to avoid regulatory reporting thresholds and detection by financial institutions. It is a common money laundering technique used during the placement stage and is considered a criminal offense in many jurisdictions."},
+    {q:"What is a Politically Exposed Person (PEP)?",opts:["A marketing influencer","An individual who holds or has held a prominent public function","A high-net-worth retail investor","A licensed financial advisor"],ans:1,exp:"A Politically Exposed Person (PEP) is an individual who currently holds or has previously held a prominent public position, such as a head of state, senior politician, judge, military officer, or executive of a state-owned enterprise. Due to their potential exposure to bribery, corruption, or abuse of public office, PEPs, their family members, and close associates are typically subject to Enhanced Due Diligence (EDD)."},
+    {q:"What is a Correspondent Banking relationship?",opts:["A bank that handles mail services","A bank providing services to another bank, facilitating cross-border transactions","A bank's customer service department","A regulatory reporting relationship"],ans:1,exp:"Correspondent banking is a relationship in which one bank (the correspondent bank) provides financial services on behalf of another bank (the respondent bank), enabling international payments, trade finance, foreign exchange transactions, and access to foreign financial markets. Because funds may pass through multiple institutions and jurisdictions, correspondent banking is considered a higher-risk area for money laundering and sanctions exposure."},
+    {q:"What does a Risk-Based Approach (RBA) to AML mean?",opts:["Using AI for compliance","Allocating AML resources proportional to assessed risk levels","Rejecting all high-risk customers","Filing SARs for all transactions"],ans:1,exp:"A Risk-Based Approach (RBA) requires financial institutions to identify, assess, and understand money laundering and terrorist financing risks, then apply AML controls and monitoring measures proportionate to those risks. Higher-risk customers, products, services, transactions, and jurisdictions receive enhanced scrutiny, while lower-risk areas may be subject to simplified measures."},
+    {q:"What is a 'shell company' in AML context?",opts:["A company that sells shell products","A legal entity with no real operations used to hide ownership","A startup in the oil industry","A licensed money service business"],ans:1,exp:"A shell company is a legal entity that has little or no legitimate business activity, employees, or physical operations. While some shell companies can be used for legitimate purposes, they are frequently associated with money laundering, tax evasion, sanctions evasion, and the concealment of beneficial ownership."},
+  ],
+  "kyc":[
+    {q:"What does KYC stand for?",opts:["Keep Your Credentials","Know Your Customer","Key Year Certification","Keep Your Crypto"],ans:1,exp:"KYC stands for Know Your Customer — the process of verifying the identity of clients as required by regulations."},
+    {q:"What is the primary purpose of CDD (Customer Due Diligence)?",opts:["To improve customer service","To verify customer identity and assess risk","To offer personalized products","To speed up onboarding"],ans:1,exp:"CDD involves verifying customer identity, understanding the nature of their business, and assessing the risk of money laundering or terrorist financing."},
+    {q:"What is Enhanced Due Diligence (EDD)?",opts:["A standard ID verification","Additional scrutiny applied to higher-risk customers like PEPs","A simplified onboarding process","A type of background check for employees"],ans:1,exp:"EDD is a more rigorous level of KYC applied to high-risk customers (PEPs, high-risk jurisdictions, complex structures) requiring deeper investigation and ongoing monitoring."},
+    {q:"What is 'beneficial ownership'?",opts:["The legal owner of a property","The natural person(s) who ultimately own or control a legal entity","A beneficiary in a will","The shareholder with most shares"],ans:1,exp:"Beneficial ownership refers to the natural person(s) who ultimately own or control a legal entity, even if ownership is held through intermediaries."},
+    {q:"What document is typically required for individual KYC?",opts:["Credit score","Government-issued photo ID and proof of address","Bank statement only","Employment contract"],ans:1,exp:"Standard individual KYC typically requires a government-issued photo ID (passport, national ID, driver's license) and proof of address (utility bill, bank statement)."},
+    {q:"What is KYB (Know Your Business)?",opts:["A CRM software category","Due diligence on business entities, verifying ownership, structure, and legitimacy","A credit scoring model","A type of business license"],ans:1,exp:"KYB extends KYC principles to business customers — verifying legal registration, beneficial ownership, directors, and the legitimacy of the business."},
+    {q:"What is a Simplified Due Diligence (SDD) scenario?",opts:["Due diligence on small transactions","Reduced KYC measures applied when risk is demonstrably low","A one-page KYC form","Self-certification without documentation"],ans:1,exp:"SDD applies when ML/TF risk is assessed as low (e.g. publicly listed companies, regulated institutions) — reduced documentation and monitoring may be appropriate."},
+    {q:"What is liveness detection in digital KYC?",opts:["Checking if a customer is alive using public records","Technology that verifies a real person is present during biometric verification","A video interview process","An AI customer service tool"],ans:1,exp:"Liveness detection uses AI/biometrics to verify that the person submitting an identity document during digital onboarding is physically present and not a photo or video."},
+    {q:"What does UBO stand for in KYB?",opts:["Unified Business Operator","Ultimate Beneficial Owner","Underwriter's Business Office","Unregistered Business Organization"],ans:1,exp:"UBO stands for Ultimate Beneficial Owner — the natural person who ultimately owns or controls 25%+ of a company (threshold varies by jurisdiction)."},
+    {q:"What is 'eKYC' and what are its regulatory challenges?",opts:["Electronic key management","Digital identity verification — challenges include cross-border recognition and data privacy","Email-based KYC — challenges include phishing","A government database — challenges include access costs"],ans:1,exp:"eKYC is fully digital identity verification using biometrics, document scanning, and database checks. Key challenges include varying regulatory acceptance, GDPR compliance, and deepfake fraud."},
+  ],
+  "risk":[
+    {q:"What is a 'red flag' in financial crime compliance?",opts:["A transaction flag in bank systems","An indicator that may suggest suspicious activity requiring investigation","A regulatory penalty notice","A type of compliance report"],ans:1,exp:"Red flags are indicators or warning signs that may suggest potential financial crime, prompting further investigation rather than immediate conclusion of guilt."},
+    {q:"What is a customer risk rating?",opts:["A credit score","A classification of a customer's ML/TF risk level based on various factors","A customer satisfaction score","A fraud detection score"],ans:1,exp:"A customer risk rating categorizes customers (Low/Medium/High) based on factors like geography, products used, transaction patterns, and entity type to determine CDD intensity."},
+    {q:"What does 'transaction monitoring' refer to in AML?",opts:["Auditing employee transactions","Automated surveillance of customer transactions to detect suspicious patterns","Monitoring market prices","Reviewing loan applications"],ans:1,exp:"Transaction monitoring is an automated process that analyzes customer transaction data in real-time or retrospectively to flag patterns indicative of financial crime."},
+    {q:"What is a 'high-risk jurisdiction'?",opts:["A country with high taxes","A country identified as having significant AML/CFT deficiencies","A country with high inflation","A country with many crypto exchanges"],ans:1,exp:"High-risk jurisdictions are countries identified (e.g. by FATF's grey/black list) as having strategic deficiencies in their AML/CFT frameworks, requiring enhanced scrutiny."},
+    {q:"What is adverse media screening?",opts:["Blocking negative news about your company","Checking customers against negative news sources for crime, fraud, or sanctions connections","Monitoring competitor press coverage","Social media marketing analysis"],ans:1,exp:"Adverse media screening involves checking customers against news databases, court records, and other sources for negative information suggesting financial crime or reputational risk."},
+    {q:"What is 'false positive' in transaction monitoring?",opts:["An alert correctly identifying fraud","An alert flagging legitimate activity as suspicious","A missed fraud transaction","A duplicate transaction alert"],ans:1,exp:"A false positive is a transaction monitoring alert that flags a legitimate customer transaction as suspicious, requiring investigation before clearing — high false positive rates waste resources."},
+    {q:"What is sanctions screening?",opts:["Checking government grants eligibility","Checking customers/transactions against sanctions lists (OFAC, UN, EU) to avoid prohibited dealings","A regulatory audit process","A credit risk assessment"],ans:1,exp:"Sanctions screening involves checking customers, transactions, and counterparties against sanctions lists (OFAC SDN, EU Consolidated List, UN Security Council) to prevent prohibited dealings."},
+    {q:"What is 'typology' in financial crime?",opts:["A study of fonts used in compliance documents","A documented pattern or method used to commit financial crime","A customer segmentation technique","A statistical analysis method"],ans:1,exp:"Typologies are documented schemes or methods used to commit money laundering or terrorist financing, published by bodies like FATF to help institutions recognize common patterns."},
+    {q:"What is 'layering risk' in transaction monitoring?",opts:["Risk from operating on multiple software layers","Risk of clients using complex transaction chains to obscure fund origins","Network infrastructure risk","Multi-currency conversion risk"],ans:1,exp:"Layering risk refers to the risk that customers use complex chains of transactions, transfers, or currency conversions to obscure the origin of illicit funds during the layering stage."},
+    {q:"What is a Name Screening false negative?",opts:["Screening a name multiple times","Failing to match a sanctioned or PEP name due to transliteration or alias variations","A correctly cleared alert","Blocking a legitimate customer by mistake"],ans:1,exp:"A false negative in name screening occurs when a sanctioned individual or PEP passes screening undetected, often due to name spelling variations, aliases, or transliteration differences."},
+  ],
+  "fintech":[
+    {q:"What does MSB stand for?",opts:["Money Services Business","Market Settlement Bank","Managed Security Broker","Merchant Savings Bureau"],ans:0,exp:"MSB stands for Money Services Business. MSBs usually provide services such as money transmission, remittance, currency exchange, check cashing, and payment services."},
+    {q:"What is a payment processor?",opts:["A company that helps merchants accept and process payments","A banknote printing company","A customer support software","A payroll tax authority"],ans:0,exp:"A payment processor helps merchants accept, authorize, and process payments. Payment processors can face fraud, chargeback, AML, and sanctions risks."},
+    {q:"What is a VASP?",opts:["Virtual Asset Service Provider","Verified Account Security Platform","Value Added Sales Partner","Virtual Audit Screening Process"],ans:0,exp:"A VASP is a Virtual Asset Service Provider. It may include crypto exchanges, custodians, brokers, and businesses that transfer or safeguard virtual assets."},
+    {q:"Why are FinTech companies subject to AML controls?",opts:["Because they may move, store, or process customer funds","Because they design mobile apps","Because they sell office software","Because they provide web hosting"],ans:0,exp:"FinTech companies may process payments, transfers, wallets, remittances, or virtual assets. These services can be misused for money laundering, fraud, sanctions evasion, or terrorist financing."},
+    {q:"What is a remittance service?",opts:["A service that transfers money, often across borders","A service that creates logos","A service that repairs computers","A service that sells insurance only"],ans:0,exp:"A remittance service allows customers to send money to another person or location, often across borders. Remittance businesses are higher-risk because of cash use, cross-border activity, and customer anonymity risks."},
+    {q:"What is a money transmitter?",opts:["A business that sends or receives funds on behalf of customers","A company that sells investment products","A cryptocurrency mining service","A bank auditor"],ans:0,exp:"A money transmitter is a business that accepts and transmits funds or value on behalf of customers. Many MSBs operate as money transmitters and are subject to AML regulations."},
+    {q:"What is chargeback fraud?",opts:["A customer disputes a legitimate transaction after receiving the service","A bank reverses a failed transfer","A merchant refunds a customer","A payment processor upgrades its system"],ans:0,exp:"Chargeback fraud occurs when a customer receives goods or services and then disputes the payment with their bank to obtain a refund unfairly."},
+    {q:"Why is sanctions screening important for payment companies?",opts:["To prevent transactions involving sanctioned individuals, entities, or countries","To calculate transaction fees","To improve customer service","To speed up payment processing"],ans:0,exp:"Sanctions screening helps payment companies prevent transactions involving sanctioned persons, organizations, or jurisdictions and avoid regulatory penalties."},
+    {q:"What is a prepaid card?",opts:["A payment card loaded with funds before use","A credit card with no spending limit","A loan product","A type of cryptocurrency wallet"],ans:0,exp:"A prepaid card contains funds that are loaded in advance and can be used for purchases or withdrawals until the balance is exhausted."},
+    {q:"What is the purpose of transaction monitoring in a FinTech company?",opts:["To identify suspicious or unusual customer activity","To increase transaction fees","To improve internet speed","To generate marketing reports"],ans:0,exp:"Transaction monitoring helps identify unusual, suspicious, or potentially illicit activity such as fraud, money laundering, sanctions evasion, or terrorist financing."}
+  ],
+  "digitalassets":[
+    {q:"What is Bitcoin?",opts:["A government-issued digital currency","A decentralized digital currency using cryptography","A type of bank account","A stock trading platform"],ans:1,exp:"Bitcoin is the first decentralized digital currency, operating without a central authority, using cryptographic proof instead."},
+    {q:"What does 'blockchain' refer to?",opts:["A type of internet firewall","A chain of encrypted emails","A distributed ledger of transactions in blocks","A cloud storage service"],ans:2,exp:"A blockchain is a distributed ledger where transactions are grouped into blocks and linked cryptographically."},
+    {q:"What is a crypto 'wallet'?",opts:["A physical wallet with RFID chip","Software/hardware that stores private keys","A bank account for crypto","A crypto exchange account"],ans:1,exp:"A crypto wallet stores private keys that prove ownership of digital assets on the blockchain."},
+    {q:"What is a 'private key' in cryptocurrency?",opts:["A password to an exchange","A secret number that allows spending crypto","A public address for receiving funds","An API key for trading bots"],ans:1,exp:"A private key is a secret cryptographic key that authorizes transactions from your address."},
+    {q:"What is 'mining' in the context of Bitcoin?",opts:["Extracting physical coins from the ground","The process of validating transactions and creating new blocks","Buying Bitcoin at low prices","Hacking into blockchain networks"],ans:1,exp:"Mining is the process by which nodes compete to solve cryptographic puzzles to validate transactions and earn block rewards."},
+    {q:"What is a 'Layer 2' solution?",opts:["The second blockchain created","A secondary protocol built atop a base blockchain for scalability","A second wallet address","An exchange's internal ledger"],ans:1,exp:"Layer 2 solutions are protocols built on top of a base blockchain (Layer 1) that improve scalability by processing transactions more efficiently while ultimately settling security and finality on the underlying blockchain. Examples include Lightning Network for Bitcoin and Arbitrum or Optimism for Ethereum."},
+    {q:"What distinguishes a privacy coin like Monero from Bitcoin?",opts:["Monero has faster transactions","Monero uses obfuscation techniques to make transactions significantly more difficult to trace","Monero is backed by gold","Monero is centrally controlled"],ans:1,exp:"Privacy coins such as Monero use technologies including ring signatures, stealth addresses, and confidential transactions to obscure sender, recipient, and transaction amount information, making blockchain tracing significantly more difficult than on transparent blockchains such as Bitcoin."},
+    {q:"What is a 'smart contract'?",opts:["A legal PDF on blockchain","Self-executing code on a blockchain triggered by conditions","A crypto loan agreement","A compliance document for exchanges"],ans:1,exp:"Smart contracts are self-executing programs deployed on a blockchain that automatically perform actions when predefined conditions are met. They are widely used in DeFi, NFTs, token issuance, lending protocols, and decentralized applications."},
+    {q:"What is DeFi?",opts:["Digital Finance Regulation","Decentralized Finance — financial services without intermediaries","Defense Finance Initiative","Deferred Investment Fund"],ans:1,exp:"DeFi (Decentralized Finance) refers to blockchain-based financial services such as lending, borrowing, trading, staking, and insurance that operate through smart contracts without relying on traditional intermediaries like banks or brokers."},
+    {q:"What is the 'Travel Rule' in crypto (FATF)?",opts:["Rules for crypto ATMs","Requirement for VASPs to share originator/beneficiary info for transfers above threshold","Rules for cross-border cash","A regulation for crypto mining"],ans:1,exp:"FATF Recommendation 16 (the Travel Rule) requires Virtual Asset Service Providers (VASPs) to collect, verify, and transmit originator and beneficiary information for qualifying virtual asset transfers, typically at or above USD/EUR 1,000, to support AML/CFT compliance and improve transaction traceability."}
+  ],
+  "gaming":[
+    {q:"What is bonus abuse on an online gaming platform?",opts:["A platform offering disproportionately large welcome bonuses","Cancelling bonus offers after they have been accepted","A technical miscalculation in the bonus engine","Exploiting promotional offers to gain unfair financial advantage, often through multiple accounts"],ans:3,exp:"Bonus abuse involves fraudsters creating multiple accounts or identifying loopholes to repeatedly claim promotional rewards. It is a significant direct cost to operators and is frequently used as a low-friction entry point for money laundering."},
+    {q:"What is multi-accounting on a gaming platform?",opts:["Managing separate accounts for different game types","Using multiple payment methods on a single account","Sharing a family account across multiple devices","One individual operating several accounts in violation of platform terms and conditions"],ans:3,exp:"Multi-accounting allows fraudsters to circumvent bonus restrictions, self-exclusion lists, and stake limits. Detection relies on device fingerprinting, IP matching, behavioural analytics, and document verification cross-referencing."},
+    {q:"What is an Account Takeover (ATO) attack?",opts:["A player transferring account ownership voluntarily","Closing and reopening a dormant account","Upgrading a standard account to VIP status","Unauthorised access to another user's account, typically to extract funds, bonuses, or use it for fraud"],ans:3,exp:"ATO attacks use credential stuffing, phishing, or SIM swapping to compromise accounts. Once inside, attackers may withdraw balances, redeem bonuses, or use the account as a mule to layer illicit funds through gaming activity."},
+    {q:"Which of the following represents the strongest fraud indicator on a gaming platform?",opts:["A player depositing via a credit card","A player submitting identity verification documents","Consistent gameplay patterns over several months","Multiple accounts registered from the same IP address or device fingerprint"],ans:3,exp:"Shared IP addresses or device fingerprints across multiple accounts is a primary multi-accounting indicator. Legitimate players rarely share devices or network infrastructure with other registered accounts, making this a high-confidence fraud signal."},
+    {q:"Which team is primarily responsible for investigating suspicious transactions on a regulated gaming platform?",opts:["The marketing department","The software development team","The customer support team","The fraud, risk, or compliance team"],ans:3,exp:"Fraud, Risk, and Compliance teams conduct transaction monitoring, AML investigations, and file Suspicious Activity Reports on gaming platforms. This function is growing rapidly as regulators — including the UK Gambling Commission and Malta Gaming Authority — increase AML requirements for iGaming operators."},
+    {q:"What is chargeback fraud in online gaming, and why is it difficult to prevent?",opts:["A payment provider reversing a failed deposit due to a technical error","An operator withholding a legitimate withdrawal","A player requesting a valid refund after a provably unfair game outcome","A player using deposited funds then disputing the charge with their bank — obtaining both the gaming service and a refund"],ans:3,exp:"Chargeback fraud, also called 'friendly fraud', results in direct financial loss for the operator. It is difficult to prevent because payment networks generally favour the cardholder, and operators must retain strong evidence of service delivery to win disputes."},
+    {q:"Why is device fingerprinting a critical tool in gaming fraud prevention?",opts:["It stores encrypted account passwords","It accelerates withdrawal processing times","It improves the visual rendering of games","It creates a unique device signature from browser, hardware, and software attributes — enabling detection of multi-accounting and returning banned users"],ans:3,exp:"Device fingerprinting collects attributes including browser type, screen resolution, installed fonts, hardware IDs, and WebGL renderer to create a near-unique identifier. This enables platforms to detect returning users who have changed their name, email, or IP address."},
+    {q:"What is collusion in online gaming and why does it raise AML concerns?",opts:["Operators sharing player data with affiliates","A platform partnering with payment providers on preferential rates","Players sharing game strategy tips on public forums","Multiple players secretly coordinating to manipulate outcomes — and potentially using gameplay to layer illicit funds between accounts"],ans:3,exp:"Collusion occurs primarily in peer-vs-peer games such as poker and fantasy sports. Beyond the sporting integrity issue, it serves as a layering mechanism: one player deliberately loses to a co-conspirator, who collects the 'winnings' — creating a legitimate-appearing payout trail for illicit funds."},
+    {q:"A player deposits large sums, places minimal low-risk bets, and withdraws quickly. What does this pattern indicate to a risk analyst?",opts:["The player is a professional gambler eligible for VIP upgrade","A responsible gaming issue requiring welfare intervention","A player testing new deposit methods","Potential use of the platform to layer funds — using gameplay as a veneer of legitimacy while minimising gambling exposure"],ans:3,exp:"The deposit-minimal play-withdraw cycle is one of the most documented gaming money laundering typologies. The criminal accepts a small net loss on bets as the 'cost' of laundering, and the subsequent withdrawal carries the appearance of legitimate gambling winnings."},
+    {q:"Why is Source of Funds (SOF) verification required for high-value gaming customers?",opts:["To offer personalised game recommendations","To enable faster KYC onboarding","To set appropriate betting limits per session","To confirm that deposited funds originate from legitimate, explainable sources — preventing the platform from being used to launder criminal proceeds"],ans:3,exp:"SOF verification is an Enhanced Due Diligence (EDD) measure requiring high-value players to evidence the origin of their funds (e.g. payslips, bank statements, tax returns). It is mandated for VIP customers by regulators including the UKGC and MGA, and is a primary AML control in iGaming compliance frameworks."}
+  ]
+}
 
 // ---- STATE ----
-let cfg = {cat:'crypto',diff:'beginner',count:10};
-let state = {qs:[],idx:0,score:0,timerId:null,timeLeft:15,totalTime:0,answered:false};
+let cfg = {cat:'aml', count:'all'};
+let state = {qs:[],idx:0,score:0,timerId:null,timeLeft:60,totalTime:0,answered:false};
 
 // ---- UI HELPERS ----
 let screenHistory = [];
@@ -889,35 +828,57 @@ document.querySelectorAll('.option-btn').forEach(btn=>{
 
 // ---- QUIZ LOGIC ----
 function startQuiz(){
-  const pool = QB[cfg.cat][cfg.diff] || QB[cfg.cat]['beginner'];
-  const count = Math.min(parseInt(cfg.count), pool.length);
-  state.qs = shuffle([...pool]).slice(0,count);
-  state.idx=0; state.score=0; state.totalTime=0;
+
+  const pool = QB[cfg.cat] || [];
+
+  let count;
+
+  if(cfg.count === 'all'){
+    count = pool.length;
+  }else{
+    count = Math.min(Number(cfg.count), pool.length);
+  }
+
+  state.qs = shuffle([...pool]).slice(0, count);
+  state.idx = 0;
+  state.score = 0;
+  state.totalTime = 0;
+
   screenHistory.push('config');
   show('quiz');
   renderQuestion();
 }
 
 function renderQuestion(){
-  const q=state.qs[state.idx];
-  const total=state.qs.length;
-  state.answered=false;
+  const q = state.qs[state.idx];
+  const total = state.qs.length;
+  state.answered = false;
 
-  document.getElementById('q-progress').textContent=`Question ${state.idx+1} of ${total}`;
-  document.getElementById('q-bar').style.width=`${((state.idx+1)/total)*100}%`;
-  document.getElementById('q-cat').textContent=cfg.cat.toUpperCase();
-  document.getElementById('q-text').textContent=q.q;
-  document.getElementById('q-explanation').style.display='none';
-  document.getElementById('q-next').style.display='none';
+  document.getElementById('q-progress').textContent = `Question ${state.idx+1} of ${total}`;
+  document.getElementById('q-bar').style.width = `${((state.idx+1)/total)*100}%`;
+  const categoryNames = {aml: "AML",kyc: "DUE DILIGENCE",risk: "RISK",msb: "MSB & FINTECH",digitalassets: "DIGITAL ASSETS & BLOCKCHAIN",gaming: "GAMING FRAUD"};document.getElementById('q-cat').textContent = categoryNames[cfg.cat] || cfg.cat.toUpperCase();
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-explanation').style.display = 'none';
+  document.getElementById('q-next').style.display = 'none';
 
-  const ol=document.getElementById('q-opts');
-  ol.innerHTML='';
-  const letters=['A','B','C','D'];
-  q.opts.forEach((opt,i)=>{
-    const btn=document.createElement('button');
-    btn.className='opt';
-    btn.innerHTML=`<span class="opt-letter">${letters[i]}</span><span>${opt}</span>`;
-    btn.addEventListener('click',()=>answer(i));
+  const ol = document.getElementById('q-opts');
+  ol.innerHTML = '';
+
+  const letters = ['A','B','C','D'];
+
+  const options = q.opts.map((text, originalIndex) => ({
+    text,
+    correct: originalIndex === q.ans
+  }));
+
+  shuffle(options);
+
+  options.forEach((option, displayIndex) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.correct = option.correct ? 'true' : 'false';
+    btn.innerHTML = `<span class="opt-letter">${letters[displayIndex]}</span><span>${option.text}</span>`;
+    btn.addEventListener('click', () => answer(btn));
     ol.appendChild(btn);
   });
 
@@ -947,32 +908,51 @@ function clearTimer(){
 }
 
 function autoFail(){
-  if(state.answered)return;
-  state.answered=true;
-  const q=state.qs[state.idx];
-  const opts=document.querySelectorAll('.opt');
-  opts.forEach((o,i)=>{
-    o.classList.add('disabled');
-    if(i===q.ans)o.classList.add('correct');
+  if(state.answered) return;
+
+  state.answered = true;
+
+  const q = state.qs[state.idx];
+  const opts = document.querySelectorAll('.opt');
+
+  opts.forEach(btn => {
+    btn.classList.add('disabled');
+
+    if(btn.dataset.correct === 'true'){
+      btn.classList.add('correct');
+    }
   });
-  showExp(q,'⏱️ Time\'s up! ');
-  document.getElementById('q-next').style.display='block';
+
+  showExp(q, '⏱️ Time\'s up! ');
+  document.getElementById('q-next').style.display = 'block';
 }
 
-function answer(idx){
-  if(state.answered)return;
-  state.answered=true;
+function answer(selectedBtn){
+  if(state.answered) return;
+
+  state.answered = true;
   clearTimer();
-  const q=state.qs[state.idx];
-  const opts=document.querySelectorAll('.opt');
-  opts.forEach((o,i)=>{
-    o.classList.add('disabled');
-    if(i===q.ans)o.classList.add('correct');
-    else if(i===idx)o.classList.add('wrong');
+
+  const q = state.qs[state.idx];
+  const opts = document.querySelectorAll('.opt');
+  const isCorrect = selectedBtn.dataset.correct === 'true';
+
+  opts.forEach(btn => {
+    btn.classList.add('disabled');
+
+    if(btn.dataset.correct === 'true'){
+      btn.classList.add('correct');
+    }
   });
-  if(idx===q.ans)state.score++;
-  showExp(q,idx===q.ans?'✅ Correct! ':'❌ Incorrect. ');
-  document.getElementById('q-next').style.display='block';
+
+  if(isCorrect){
+    state.score++;
+  } else {
+    selectedBtn.classList.add('wrong');
+  }
+
+  showExp(q, isCorrect ? '✅ Correct! ' : '❌ Incorrect. ');
+  document.getElementById('q-next').style.display = 'block';
 }
 
 function showExp(q,prefix){
@@ -1183,44 +1163,6 @@ function shuffle(arr){
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
   return arr;
 }
-</script>
-<!-- Code injected by live-server -->
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
 </script>
 </body>
 </html>
